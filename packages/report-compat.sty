@@ -1,0 +1,26 @@
+\ProvidesPackage{packages/report-compat}
+\RequirePackage{etoolbox}
+\RequirePackage{pgfgantt}
+\RequirePackage{longtable}
+
+\def\gtt@vgrid@do#1,{
+  \ifx\relax#1\else
+    \ifnum\gtt@currgrid>\gtt@chartwidth\else
+      \gtt@vgrid@analyze#1\relax
+    \fi
+    \expandafter\gtt@vgrid@do
+  \fi
+}
+\def\gtt@hgrid@do#1,{
+  \ifx\relax#1\else
+    \ifnum\gtt@currgrid<\gtt@currentline\else
+      \gtt@hgrid@analyze#1\relax
+    \fi
+    \expandafter\gtt@hgrid@do
+  \fi
+}
+
+\patchcmd{\LT@output}{\copy\LT@foot\vss}{\copy\LT@foot\vfil}{}
+  {\PackageError{report-compat}{Cannot update longtable final-page glue}{Check the installed longtable version.}}
+\patchcmd{\LT@output}{\copy\LT@foot\vss}{\copy\LT@foot\vfil}{}
+  {\PackageError{report-compat}{Cannot update longtable page glue}{Check the installed longtable version.}}
