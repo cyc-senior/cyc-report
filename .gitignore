@@ -1,0 +1,23 @@
+# LaTeX build outputs
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
+*.lol
+report.pdf
+
+# OS
+.DS_Store
+
+# local junk waiting to be deleted
+_to_delete/

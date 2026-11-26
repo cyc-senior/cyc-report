@@ -1,0 +1,24 @@
+// Design generation pipeline of the CYC backend (apps/backend/src/modules/generation).
+// Render: dot -Tpdf tools/generation_pipeline.dot -o figures/ch3-methodology/generation-pipeline.pdf
+digraph G {
+  graph [rankdir=TB, nodesep=0.35, ranksep=0.32, fontname="TH Sarabun New"];
+  node  [shape=box, style="rounded", fontname="TH Sarabun New", fontsize=17, margin="0.18,0.06"];
+  edge  [fontname="TH Sarabun New", fontsize=15, color="#444444"];
+
+  start   [label="Designer ยืนยัน structured prompt\nแล้วสั่งสร้าง design round", shape=box, style="rounded,filled", fillcolor="#E8E8E8"];
+  queue   [label="สร้าง GenerationJob และเข้าคิว BullMQ\n(ติดตามสถานะผ่าน SSE)"];
+  persona [label="สังเคราะห์ persona artifact จาก prompt\n(ข้ามขั้นนี้ถ้า designer เลือก persona ไว้แล้ว)"];
+  gen     [label="สร้างหน้าจอ HTML ทีละ variant (A, B)\nจาก design intent, persona และ user story"];
+  check   [label="Sanitize HTML และตรวจโครงสร้าง, component ของ UI kit, สีแบรนด์, platform\nและการเข้าถึงตามมาตรฐานใน design intent (ค่าเริ่มต้น WCAG 2.1 AA)"];
+  pass    [label="ผ่านการตรวจ?", shape=diamond, style="", margin="0.05,0.03"];
+  repair  [label="ส่งปัญหาที่พบกลับให้โมเดลแก้\n(ไม่เกิน DESIGN_REPAIR_ATTEMPTS = 2 ครั้ง)"];
+  save    [label="บันทึก UIVariant สถานะ READY\nรอ designer ตรวจและปรับแก้ผ่านแชต", style="rounded,filled", fillcolor="#E8E8E8"];
+  fail    [label="นับเป็น variant ที่ล้มเหลว\n(เริ่มใหม่ได้ DESIGN_VARIANT_RESTARTS = 1 ครั้ง)"];
+
+  start -> queue -> persona -> gen -> check -> pass;
+  pass -> save   [label=" ผ่าน"];
+  pass -> repair [label=" ไม่ผ่าน"];
+  repair -> check;
+  repair -> fail [label=" แก้ครบแล้วยังไม่ผ่าน", style=dashed];
+  {rank=same; save; repair}
+}

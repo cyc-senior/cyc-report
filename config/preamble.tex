@@ -1,0 +1,338 @@
+% !TeX root = ../report.tex
+% Packages, fonts, margins, captions, listings and macros (moved from report.tex)
+%%%%%%%%%%%%%%%%%%%%%% Packages and Configs %%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{color}
+\usepackage{pgfgantt}                   % Gantt chart
+\usepackage{polyglossia}
+\usepackage{caption}                    % Figures and tables captions
+\usepackage{pdflscape}                 % Landscape pages for wide diagrams
+
+\usepackage{etoolbox}                   % Patching commands for macros creating i.e. preto
+\usepackage{tabularx}
+\usepackage{longtable}                  % Long continuous table
+\usepackage{ragged2e}                   % Forcing figure
+\usepackage{float}                      % ER and checkmark
+\usepackage{tikz}                       % Drawing graphs and symbols
+\usetikzlibrary{positioning, arrows.meta, fit, backgrounds}
+\usepackage{subfig}                     % Subfigures
+\usepackage{keyval}                     % Subfigures alignment
+\usepackage[export]{adjustbox}          % Subfigures aLignment
+\newcommand{\framedgraphic}[2][]{\adjustbox{max width=\linewidth}{\fbox{\includegraphics[#1]{#2}}}}
+\usepackage{cleveref}                   % Clever label references
+\usepackage{xltabular}   % longtable + tabularx X-columns, breaks across pages
+
+\usepackage{lmodern}
+\usepackage{listings}                   % Listings as code blocks
+\usepackage{packages/listings-golang}   % Listings support for Golang
+\usepackage{packages/listings-yaml}     % Listing support for YAML
+\usepackage{packages/report-compat}
+\usepackage{hhline}
+
+%: Biblatex for managing bibliography; instead of using old \bibliography{}
+%: NOTE: Biblatex define typesetting onto compilation cache.
+%: So recompile from scratch (Remove aux and bbl file and recompile)
+%: Everytime you stopped using biblatex
+
+\usepackage[
+  backend=biber,      % Biber or Bibtex
+  style=ieee,         % Bib standard
+  sorting=none,       % Sort by appearance in paper
+  % sorting=ynt,       % Sort by year, name...
+  % sortcites=true,    % Some other  example options ...
+  dateabbrev=true,
+  urldate=long,
+  block=none,
+  indexing=false,
+  citereset=none,
+  isbn=true,
+  url=true,
+  doi=true,           % Prints DOI
+  natbib=true         % if you need Natbib functions
+]{biblatex}
+
+%%%%%%%%%%%%%%%%%% Custom Macros & Settings %%%%%%%%%%%%%%%%%%%%%%%
+%: From this part to \begin{document}
+%: Do not modify unless you know what you are doing...
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% Biblatex macro %%%%%%%%%%
+
+%: Setup URL access date string
+\DefineBibliographyStrings{english}{%
+  urlseen = {accessed}
+}
+
+%: Reference bib files
+%: Make sure you reference correct bib file...
+\addbibresource{bib/cyc.bib}
+\DeclareLanguageMapping{thai}{english}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% Font settings %%%%%%%%%
+
+%: Define 1st and 2nd language
+\setdefaultlanguage{thai}
+\setotherlanguage{english}
+
+%: Uncomment following to used Laksaman
+%: which is equivalent of Sarabun
+% \setmainfont[
+%     Scale=1.0,
+%     LetterSpace=0,
+%     WordSpace=1.0,
+%     FakeStretch=1.0,
+%     Mapping=tex-text
+% ]{Laksaman:script=thai}
+% \newfontfamily\thaifont[
+%     Scale=1.0,
+%     LetterSpace=0,
+%     WordSpace=1.0,
+%     FakeStretch=1.0,
+%     Mapping=tex-text
+% ]{Laksaman:script=thai}
+% \newfontfamily\thaifonttt{Tlwg Typist:script=thai}
+
+%: Uncomment to use actual Sarabun (font file required)
+\newfontfamily\thaifont[Script=Thai,Scale=1.23, Mapping=tex-text]{THSarabunNew.ttf}[
+  Path=fonts/,
+  Extension=.ttf,
+  BoldFont=*-Bold,
+  ItalicFont=*-Italic,
+  BoldItalicFont=*-BoldItalic,
+]
+\newfontfamily\thaifonttt[Script=Thai,Scale=1.23]{THSarabunNew.ttf}[
+  Path=fonts/,
+  Extension=.ttf,
+  BoldFont=*-Bold,
+  ItalicFont=*-Italic,
+  BoldItalicFont=*-BoldItalic,
+]
+
+\defaultfontfeatures{Mapping=tex-text,Scale=1.23,LetterSpace=0.0}
+\setmainfont[Scale=1.23,LetterSpace=0,WordSpace=1.0,FakeStretch=1.0,Mapping=tex-text]{THSarabunNew.ttf}[
+  Path=fonts/,
+  Extension=.ttf,
+  BoldFont=*-Bold,
+  ItalicFont=*-Italic,
+  BoldItalicFont=*-BoldItalic,
+]
+
+%: Set linebreak to Thai
+\XeTeXlinebreaklocale "th"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+\emergencystretch=3em
+
+%: Define fonts for code blocks
+\newfontfamily\codefont[Scale=0.9]{CourierPrime.ttf}[
+  Path=fonts/,
+  Extension=.ttf,
+  BoldFont=*-Bold,
+  ItalicFont=*-Italic,
+  BoldItalicFont=*-BoldItalic,
+]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% Margin settings %%%%%%%%
+%\linespread{1.6} % Double-spaced
+%\oddsidemargin    0.5in
+%\evensidemargin   0.5in
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% Content font size %%%%%%%
+%: Body text size in real (rendered) points.
+%: TH Sarabun New is loaded with Scale=1.23, so the size LaTeX is asked for
+%: is divided by 1.23 to make the rendered size come out at exactly this value.
+%: Change \bodyfontsize to resize the whole document (headings follow).
+\newdimen\bodyfontsize
+\bodyfontsize=14.3pt   % matches the progress report example (was 16pt)
+
+\makeatletter
+%: \thsz{\cmd}{size*10}{baseline*10} sets \cmd to a fixed \fontsize. The two numbers
+%: are the size10.clo values (in pt) times 10. The numbers are computed once here
+%: (not at every use). They are declared robust like the ones in size10.clo, which
+%: keeps them safe inside \MakeUppercase (used for chapter headings).
+\newcommand\thsz[3]{%
+  \begingroup
+  \edef\thsz@x{\endgroup\noexpand\DeclareRobustCommand\noexpand#1{\noexpand\@setfontsize\noexpand#1%
+  {\strip@pt\dimexpr\bodyfontsize*#2/123\relax}{\strip@pt\dimexpr\bodyfontsize*#3/123\relax}}}%
+\thsz@x}
+\thsz\normalsize{100}{120}
+\thsz\tiny{50}{60}
+\thsz\scriptsize{70}{80}
+\thsz\footnotesize{80}{95}
+\thsz\small{90}{110}
+\thsz\large{120}{140}
+\thsz\Large{144}{180}
+\thsz\LARGE{173}{220}
+\thsz\huge{207}{250}
+\thsz\Huge{249}{300}
+%: Display math / list spacing that size10.clo attaches to these commands
+\g@addto@macro\normalsize{%
+  \abovedisplayskip 12\p@ \@plus3\p@ \@minus 6\p@
+  \abovedisplayshortskip \z@ \@plus 3\p@
+  \belowdisplayshortskip 6.5\p@ \@plus3.5\p@ \@minus 3\p@
+  \belowdisplayskip \abovedisplayskip
+\let\@listi\@listI}
+\g@addto@macro\footnotesize{%
+  \abovedisplayskip 6\p@ \@plus2\p@ \@minus4\p@ \abovedisplayshortskip \z@ \@plus\p@
+\belowdisplayshortskip 3\p@ \@plus\p@ \@minus2\p@ \belowdisplayskip \abovedisplayskip}
+\g@addto@macro\small{%
+  \abovedisplayskip 8.5\p@ \@plus3\p@ \@minus4\p@ \abovedisplayshortskip \z@ \@plus2\p@
+\belowdisplayshortskip 4\p@ \@plus2\p@ \@minus2\p@ \belowdisplayskip \abovedisplayskip}
+
+%: The class hard-codes heading sizes (12pt / 11pt) for a 10pt body; with a 16pt
+%: body they would render smaller than the text. Same layout as cpe-thesis-th.cls,
+%: but the sizes keep the class' original ratios to the body (1.2x / 1.1x).
+\thsz\thsz@section{120}{168}
+\thsz\thsz@subsection{110}{156}
+\renewcommand
+\section{\@startsection{section}{1}{\z@}%
+  {-3.5ex \@plus -1ex \@minus -.2ex}{0.1ex\@plus.1ex}%
+{\normalfont\thsz@section\bfseries}}
+\renewcommand
+\subsection{\@startsection{subsection}{2}{\z@}%
+  {-3.25ex\@plus -1ex \@minus -.2ex}{0.1ex \@plus .2ex}%
+{\normalfont\thsz@subsection\bfseries}}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Paragraph Settings %%%%%%%
+\linespread{1.15}
+
+\newcommand{\thaijustify}[1]{%
+  % \ifnum\value{isfigure}=0
+  %   \newline % If counter is set, no newline
+  % \fi
+  \par\hspace{30pt}\justifying
+  #1
+  % \vspace{1mm}
+  % \setcounter{isfigure}{0}%
+}
+
+\newcommand{\thaicaption}[1]{%
+  % \ifnum\value{isfigure}=0
+  %   \newline % If counter is set, no newline
+  % \fi
+  \par\justifying
+  #1
+  % \vspace{1mm}
+  % \setcounter{isfigure}{0}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Caption settings %%%%%%%%%
+%: Define how the captions of each report
+%: element are formatted.
+
+\captionsetup[table]{
+  format=hang,
+  labelfont=bf,
+  position=top,
+  labelsep=space,
+  justification=justified,
+  singlelinecheck=true
+}
+\captionsetup[figure]{
+  format=hang,
+  labelfont=bf,
+  position=bottom,
+  labelsep=space,
+  justification=justified,
+  singlelinecheck=true
+}
+\captionsetup[subfloat]{
+  format=hang,
+  labelfont=bf,
+  labelformat=simple,
+  labelsep=period,
+  justification=justified,
+  singlelinecheck=true
+  %listofformat=subparens
+}
+\captionsetup[lstlisting]{
+  format=hang,
+  labelfont=bf,
+  position=top,
+  labelsep=space,
+  justification=justified,
+  singlelinecheck=true,
+  skip=10pt
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% Numbering styling %%%%%%%
+% Enumerate using arabic numbers
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Subfigure settings %%%%%%%
+
+%\renewcommand{\subfigtopskip}{10pt}
+%\renewcommand{\subfigbottomskip}{-5pt}
+%\renewcommand{\subfigcapskip}{-6pt} %vertical space between caption
+%                                    %and figure.
+%\renewcommand{\subfigcapmargin}{0pt}
+
+% Use thai alphabets for captions
+\renewcommand{\thesubfigure}{\thalph{subfigure}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% Tikz Settings %%%%%%%%%%
+%: Tikz is used for drawing simple edge and node graph
+%: Import shapes for usage
+\usetikzlibrary{er, positioning, shapes.geometric, arrows}
+
+%: Define checkmark symbol
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Listings Settings %%%%%%%%
+%: Listings is used for displaying the program or
+%: codes in reports as statement
+
+%: Define text color for code blocks
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+%: Define code blocks settings
+\lstset{
+  frame=tb,
+  language=Golang,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\codefont},
+  numbers=left,
+  numberstyle=\small\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=false,
+  breakatwhitespace=false,
+  tabsize=3
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% Math macro %%%%%%%%%%%
+%: Fraction settings
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+
+%: Define theorem and proof
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+
+%: `proof` and `definition` environments already exist in cpe-thesis-th.cls,
+%: so they are intentionally NOT redefined here (a local \def\proof would shadow them).
+
+%\newenvironment{proof}{{\sc Proof:}}{~\hfill \blacksquare}
+%% The hyperref package redefines the \appendix. This one
+%% is from the dissertation.cls
+%\def\appendix#1{\iffirstappendix \appendixcover \firstappendixfalse \fi \chapter{#1}}
+%\renewcommand{\arraystretch}{0.8}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

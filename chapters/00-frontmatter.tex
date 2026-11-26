@@ -1,0 +1,198 @@
+% !TeX root = ../report.tex
+% Front matter, laid out like the course's progress report example:
+% cover, signature page, Abstract, บทคัดย่อ, สารบัญ, สารบัญตาราง, สารบัญรูปภาพ,
+% then the glossary. Names and committee members are set in config/report-info.tex.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cover %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%: Thai cover: logo, title, members (Thai names), and the Thai degree statement.
+\begin{titlepage}
+  \thispagestyle{empty}
+  \setlength{\parindent}{0pt}
+  \centering
+  \vspace*{-0.5cm}
+  \includegraphics[width=4.0cm]{figures/common/logo02.jpg}\par
+  \vspace{2.2cm}
+  \thaidisstitleone\par
+  \vspace{4.5cm}
+  \thaidissauthorone\par
+  \thaidissauthortwo\par
+  \thaidissauthorthree\par
+  \thaidissauthorfour\par
+  \vfill
+  \thaiworktype นี้เป็นส่วนหนึ่งของการศึกษาตามหลักสูตร\par
+  \thaidissdegree\ สาขาวิชา\thaifieldofstudy\par
+  คณะ\thaifaculty\par
+  มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี\par
+  ปีการศึกษา \thaidissyear\par
+  \vspace*{2.5cm}
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Signature page %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\sigline}[2]{%
+  \makebox[0.62\textwidth]{\dotfill} & #2 \\
+  \makebox[0.62\textwidth]{(#1)} & \\[0.9cm]}
+\begin{titlepage}
+  \thispagestyle{empty}
+  \setlength{\parindent}{0pt}
+  \centering
+  \vspace*{0.3cm}
+  \disstitleone\par
+  \vspace{1.2cm}
+  \begin{tabular}{@{}l@{\hspace{1.2em}}l@{}}
+    \engauthorone   \\
+    \engauthortwo   \\
+    \engauthorthree \\
+    \engauthorfour  \\
+  \end{tabular}\par
+  \vspace{1.6cm}
+  A Project Submitted in Partial Fulfillment of the Requirements for\par
+  the Degree of Bachelor of Engineering (Computer Engineering)\par
+  Faculty of Engineering\par
+  King Mongkut's University of Technology Thonburi\par
+  \dissyear\par
+  \vspace{1.2cm}
+  {\raggedright Project Committee\par}
+  \vspace{1.0cm}
+  \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}l@{}}
+    \sigline{\engadvisorsig}{Project Advisor}
+    \sigline{\engcoadvisorsig}{Project Co-Advisor}
+    \sigline{\engcommitteeone}{Committee Member}
+    \sigline{\engcommitteetwo}{Committee Member}
+  \end{tabular*}\par
+  \vfill
+  Copyright reserved\par
+  \vspace*{2.5cm}
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Abstract pages %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagenumbering{roman}
+\setcounter{page}{1}
+\pagestyle{plain}
+
+\newcommand{\infotable}[1]{%
+  \begin{flushleft}
+    \renewcommand{\arraystretch}{1.0}
+    \begin{tabular}{@{}>{\bfseries}p{0.24\textwidth}@{}p{0.74\textwidth}@{}}
+      #1
+    \end{tabular}
+  \end{flushleft}}
+\newcommand{\memberline}[2]{\makebox[6.5em][l]{#1}#2}
+
+\clearpage
+\infotable{
+  Project Title  & \disstitleone \\
+  Credits        & \disscredit \\
+  Members        & \memberline{\dissstudentidone}{\engauthorone} \\
+                 & \memberline{\dissstudentidtwo}{\engauthortwo} \\
+                 & \memberline{\dissstudentidthree}{\engauthorthree} \\
+                 & \memberline{\dissstudentidfour}{\engauthorfour} \\
+  Project Advisor & \engadvisor \\
+  Project Co-Advisor & \engcoadvisor \\
+  Program        & \dissdegree \\
+  Field of Study & \fieldofstudy \\
+  Department     & \department \\
+  Faculty        & \faculty \\
+  Academic Year  & \dissyear \\
+}
+\vspace{0.8cm}
+\begin{center}\textbf{Abstract}\end{center}
+\begin{otherlanguage}{english}
+\thaijustify{
+UX/UI designers usually build prototypes by hand under tight deadlines, so they test with users less often than they should and collect too little feedback. Existing Generative AI tools help with single steps of the UX/UI Development Life Cycle, but they are not connected into one process. This project develops a platform that integrates Generative AI into comparative usability testing.}
+
+\thaijustify{
+In this project, a designer describes the design intent in natural language and the platform generates a two-alternative UI for testing. Testers give contextual feedback directly on the components they choose. AI then gathers the feedback and identifies patterns, insights and key issues, which the designer reviews and confirms when AI need a review and decision from human (human-in-the-loop). The platform also produces reports that trace how user feedback shaped each design decision, so designers can justify the final design to stakeholders.}
+\end{otherlanguage}
+
+\vspace{0.6em}
+\noindent\textbf{Keywords:} \engkeywords
+
+\clearpage
+\infotable{
+  หัวข้อปริญญานิพนธ์ & \thaidisstitleone \\
+  หน่วยกิต          & \disscredit \\
+  ผู้เขียน           & \memberline{\dissstudentidone}{\thaidissauthorone} \\
+                    & \memberline{\dissstudentidtwo}{\thaidissauthortwo} \\
+                    & \memberline{\dissstudentidthree}{\thaidissauthorthree} \\
+                    & \memberline{\dissstudentidfour}{\thaidissauthorfour} \\
+  อาจารย์ที่ปรึกษา    & \thaidissadvisor \\
+  อาจารย์ที่ปรึกษาร่วม & \thaidisscoadvisor \\
+  หลักสูตร          & \thaidissdegree \\
+  สาขาวิชา          & \thaifieldofstudy \\
+  ภาควิชา           & \thaidepartment \\
+  คณะ              & \thaifaculty \\
+  ปีการศึกษา         & \thaidissyear \\
+}
+\vspace{0.8cm}
+\begin{center}\textbf{บทคัดย่อ}\end{center}
+\thaijustify{
+ในกระบวนการออกแบบประสบการณ์ผู้ใช้และส่วนต่อประสานผู้ใช้ (UX/UI Design) นักออกแบบมักต้องสร้างต้นแบบด้วยตนเองภายใต้เวลาที่จำกัด ทำให้ทดสอบกับผู้ใช้ได้ไม่บ่อยและเก็บข้อเสนอแนะได้ไม่เพียงพอ ขณะที่เครื่องมือ Generative AI ที่มีอยู่ยังกระจัดกระจายและช่วยได้เพียงบางขั้นตอนของ UX/UI Development Life Cycle โครงงานนี้จึงพัฒนาแพลตฟอร์มที่บูรณาการ Generative AI เข้ากับกระบวนการ comparative usability testing}
+
+\thaijustify{
+โครงงานนี้ให้นักออกแบบอธิบายความต้องการทางการออกแบบด้วยภาษาธรรมชาติ จากนั้นแพลตฟอร์มจะสร้าง two-alternative UI สำหรับการทดสอบ ผู้เข้าร่วมทดสอบให้ข้อเสนอแนะเชิงบริบทบน component ที่ต้องการได้โดยตรง จากนั้นปัญญาประดิษฐ์จะรวบรวมและวิเคราะห์ข้อเสนอแนะเพื่อระบุรูปแบบ ข้อมูลเชิงลึก และประเด็นสำคัญ โดยนักออกแบบเป็นผู้ตรวจสอบและตัดสินใจเมื่อปัญญาประดิษฐ์ต้องการการตัดสินใจจากมนุษย์ (human-in-the-loop) นอกจากนี้ระบบยังสร้างรายงานที่สืบย้อนได้ว่าข้อเสนอแนะของผู้ใช้ส่งผลต่อการตัดสินใจเชิงออกแบบอย่างไร เพื่อใช้เป็นเหตุผลประกอบในการสื่อสารกับผู้มีส่วนได้ส่วนเสีย}
+
+\vspace{0.6em}
+\noindent\textbf{คำสำคัญ:} \thaikeywords
+
+%%%%%%%%%%%%%%%%%%%%% Table of contents and lists %%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents
+\listoftables
+\listoffigures
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Glossary %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%% List of vocabs & terms %%%%%%%%%%%%%%%%%%%
+%: Add your own terms and definitions below, following the example format.
+\newcommand{\tableraglf}[1]{\RaggedRight{#1}}
+\listofvocab
+\begin{flushleft}
+  \begin{xltabular}{\textwidth}{@{}>{\RaggedRight\arraybackslash}p{0.31\textwidth}@{\quad=\quad}>{\RaggedRight\arraybackslash}X@{}}
+    UX/UI Design / การออกแบบประสบการณ์ผู้ใช้และส่วนต่อประสานผู้ใช้ & \tableraglf{กระบวนการออกแบบที่ครอบคลุมสองส่วนหลัก คือ UX (User Experience) ซึ่งเน้นการออกแบบภาพรวมของประสบการณ์ที่ผู้ใช้ได้รับขณะใช้งานผลิตภัณฑ์หรือบริการ เช่น ความง่ายในการใช้งาน ความสะดวก และความพึงพอใจ และ UI (User Interface) ซึ่งเน้นการออกแบบส่วนต่อประสานที่ผู้ใช้มองเห็นและโต้ตอบด้วยโดยตรง เช่น ปุ่มกด เมนู สี และรูปแบบตัวอักษร โดยทั้งสองส่วนทำงานร่วมกันเพื่อให้ผลิตภัณฑ์ดิจิทัล เช่น เว็บไซต์หรือแอปพลิเคชัน ใช้งานได้ง่าย มีประสิทธิภาพ และตอบสนองความต้องการของผู้ใช้ได้อย่างแท้จริง} \\
+
+    UX/UI development life cycle (UX/UI DLC) & \tableraglf{วงจรการพัฒนางานออกแบบ UX/UI ซึ่งเป็นกระบวนการที่มีขั้นตอนต่อเนื่องกันตั้งแต่การเริ่มต้นจนถึงการนำไปใช้งานจริง โดยทั่วไปประกอบด้วยขั้นตอนหลัก เช่น การวิจัยและทำความเข้าใจผู้ใช้ (Research) การกำหนดปัญหาและความต้องการ (Define) การออกแบบแนวคิดและโครงร่าง (Ideate) การสร้างต้นแบบ (Prototype) และการทดสอบกับผู้ใช้จริง (Testing) ทั้งนี้ในแต่ละรอบของวงจรมักมีการนำผลตอบรับกลับมาปรับปรุงซ้ำ (Iteration) เพื่อให้ผลิตภัณฑ์ตอบโจทย์ผู้ใช้ได้ดียิ่งขึ้น} \\
+
+    Usability Testing / การทดสอบการใช้งาน & \tableraglf{กระบวนการทดสอบการใช้งาน โดยให้ผู้เข้าร่วมทดสอบลองใช้งานระบบและหาจุดที่ใช้งานยากหรือติดขัด ซึ่งในขณะที่ทำการทดสอบ ผู้เข้าร่วมการทดสอบจำเป็นต้องคิดไปด้วยพูดไปด้วย (Thinking-Aloud) โดยนักออกแบบจะคอยสังเกตพฤติกรรมการใช้งานและรับฟังความเห็นของผู้เข้าร่วมทดสอบขณะทำภารกิจที่กำหนด} \\
+
+    Comparative Usability Testing & \tableraglf{วิธีการทดสอบการใช้งานเชิงคุณภาพกับผู้เข้าร่วมทดสอบ โดยให้ผู้เข้าร่วมทดสอบทดลองใช้งานต้นแบบผลิตภัณฑ์สองรูปแบบที่มีเป้าประสงค์เดียวกันเพื่อเปรียบเทียบประสิทธิภาพการใช้งานและให้ข้อคิดเห็นหรือข้อเสนอแนะเกี่ยวกับรูปแบบหรือผลิตภัณฑ์นั้น ๆ พร้อมทั้งเลือกรูปแบบใดรูปแบบหนึ่งที่เห็นว่าเหมาะสมกับเป้าประสงค์นั้น ๆ} \\
+
+    Contextual Feedback / ข้อเสนอแนะเชิงบริบท & \tableraglf{ข้อคิดเห็นหรือคำแนะนำที่กล่าวเฉพาะเจาะจงกับสิ่งใดสิ่งหนึ่ง เพื่อให้คำแนะนำมีความเกี่ยวข้องและนำไปใช้ได้ตรงจุดมากขึ้น} \\
+
+    Wireframe / โครงร่างหน้าจอ & \tableraglf{โครงร่างพื้นฐานแสดงตำแหน่งองค์ประกอบบนหน้าจอ โดยยังไม่เน้นสีสันหรือรายละเอียดด้านภาพ ใช้สื่อสารการจัดวางในขั้นต้นของการออกแบบ} \\
+
+    Prototype / ต้นแบบ & \tableraglf{ต้นแบบผลิตภัณฑ์ที่สร้างขึ้นเพื่อทดสอบแนวคิดก่อนพัฒนาจริง สามารถโต้ตอบได้ในระดับหนึ่ง แบ่งเป็นสามระดับตามความน้อย-มากของรายละเอียดในต้นแบบ คือ low, mid, high-fidelity prototype} \\
+
+    Design System & \tableraglf{ชุดมาตรฐานการออกแบบที่รวบรวมองค์ประกอบ กฎเกณฑ์ และแนวทางปฏิบัติไว้ในที่เดียว เช่น สี ตัวอักษร ไอคอน และ component ต่าง ๆ เพื่อให้การออกแบบผลิตภัณฑ์มีความสอดคล้องและเป็นมาตรฐานเดียวกันทั้งระบบ} \\
+
+    Insight / ข้อมูลเชิงลึก & \tableraglf{ความเข้าใจที่ได้จากการวิเคราะห์ข้อมูลหรือพฤติกรรมผู้ใช้ ซึ่งเปิดเผยปัญหาหรือความต้องการที่ซ่อนอยู่} \\
+
+    User / ผู้ใช้ & \tableraglf{บุคคลที่มีปฏิสัมพันธ์โดยตรงกับผลิตภัณฑ์ ระบบ หรือบริการ เพื่อบรรลุเป้าหมายของตนเอง} \\
+
+    Generative AI / ปัญญาประดิษฐ์แบบรู้สร้าง & \tableraglf{เทคโนโลยีปัญญาประดิษฐ์ที่สามารถสร้างเนื้อหาใหม่ เช่น ข้อความ ภาพ เสียง หรือโค้ดจากคำสั่ง (prompt)} \\
+
+    Design Intent / ความต้องการทางการออกแบบ & \tableraglf{เจตนาหรือเป้าหมายเชิงการออกแบบที่นักออกแบบต้องการสื่อสาร ใช้เป็นแนวทางตัดสินใจในการออกแบบ} \\
+
+    Component & \tableraglf{ส่วนประกอบย่อยที่นำกลับมาใช้ซ้ำได้ใน UI เช่น ปุ่มหรือช่องกรอกข้อมูล ช่วยให้การออกแบบสอดคล้องกัน} \\
+
+    Two alternative UI & \tableraglf{UI ที่ใช้สำหรับการทำ comparative usability testing โดย UI ทั้งสองแบบต้องถูกทำขึ้นเพื่อเป้าประสงค์เดียวกัน แต่มีความแตกต่างกันในด้านการใช้งาน เช่น microcopy, layout} \\
+
+    Human-in-the-loop & \tableraglf{แนวคิดที่มนุษย์เข้ามาใช้วิจารณญาณตรวจสอบและปรับปรุงผลลัพธ์จาก Generative AI เพื่อความถูกต้องเหมาะสม} \\
+
+    Stakeholder / ผู้มีส่วนได้เสีย & \tableraglf{บุคคลหรือกลุ่มที่มีส่วนได้ส่วนเสียกับโครงการ เช่น ผู้บริหารหรือผู้ว่าจ้าง ซึ่งมีบทบาทในการตัดสินใจหรือสนับสนุนโครงการ} \\
+
+   % Cognitive Overload & \tableraglf{ภาวะที่ได้รับข้อมูลมากเกินความสามารถในการประมวลผลของสมอง ส่งผลให้สับสนหรือตัดสินใจผิดพลาด} \\
+
+    Requirement / ความต้องการ & \tableraglf{เงื่อนไขที่ผลิตภัณฑ์ต้องมีเพื่อตอบสนองความต้องการผู้ใช้หรือเป้าประสงค์ของโครงการ} \\
+
+    Usability Tester / ผู้เข้าร่วมทดสอบ & \tableraglf{บุคคลที่เข้าร่วมทดสอบการใช้งานผลิตภัณฑ์ พร้อมให้ข้อคิดเห็นเพื่อนำไปปรับปรุงการออกแบบ} \\
+
+    Persona Artifact & \tableraglf{เอกสารจำลองลักษณะผู้ใช้กลุ่มเป้าหมาย เช่น ชื่อ อายุ พฤติกรรม และเป้าหมาย เพื่อให้ทีมออกแบบเข้าใจผู้ใช้ชัดเจนขึ้น} \\
+    %  & \tableraglf{ } \\
+
+    %  & \tableraglf{ } \\
+
+    %  & \tableraglf{ } \\
+
+    %  & \tableraglf{ } \\
+
+    %  & \tableraglf{ } \\
+  \end{xltabular}
+\end{flushleft}
