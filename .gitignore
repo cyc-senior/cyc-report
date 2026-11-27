@@ -21,3 +21,6 @@ report.pdf
 
 # local junk waiting to be deleted
 _to_delete/
+
+# Reference PDFs and build output at the root (figures/*.pdf stay tracked)
+/*.pdf

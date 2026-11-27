@@ -1,0 +1,29 @@
+% !TeX root = ../../progress-sem1.tex
+% Section 3.4 (subsections): one subsection per layer of the system architecture,
+% matching "สถาปัตยกรรมโดยภาพรวมของระบบ" in Progress_Sem1_THAI_Example1.pdf.
+% Input from chapters/03-methodology.tex, after the architecture figure.
+
+\subsection{Client Side (ส่วนผู้ใช้งาน)}
+\thaijustify{
+  ผู้ใช้ทุกบทบาทเข้าใช้งานผ่านเว็บเบราว์เซอร์ นักออกแบบ (Designer) ใช้หน้าจอหลักของแพลตฟอร์มตั้งแต่การสร้างโปรเจกต์จนถึงการปรับแก้ UI ผู้เข้าร่วมทดสอบ (Usability Tester) เข้าร่วมเซสชันผ่านลิงก์เชิญโดยไม่ต้องสมัครสมาชิก ส่วน Client, Developer และ Project Manager ใช้มุมมองสำหรับติดตามสถานะ รับมอบงาน และดูรายงาน
+}
+
+\subsection{Frontend Layer}
+\thaijustify{
+  Frontend พัฒนาด้วย Next.js แบบ App Router แบ่ง route ออกเป็นกลุ่ม \texttt{(auth)} สำหรับการเข้าสู่ระบบ \texttt{(dashboard)} สำหรับ workspace และโปรเจกต์ และ \texttt{(legal)} สำหรับนโยบายความเป็นส่วนตัวและข้อกำหนดการใช้งาน หน้าจอสื่อสารกับ backend ผ่าน REST API และรับความคืบหน้าของงาน AI ผ่าน SSE หน้าตัวอย่าง UI ที่ AI สร้างแสดงใน iframe ที่ไม่อนุญาตให้รันสคริปต์ เพื่อป้องกันโค้ดที่ไม่ปลอดภัยจากผลลัพธ์ของโมเดล
+}
+
+\subsection{Backend API Layer}
+\thaijustify{
+  Backend พัฒนาด้วย NestJS แบบ monolith แบ่งเป็น module ตามโดเมน ได้แก่ \texttt{auth}, \texttt{access}, \texttt{users}, \texttt{workspaces}, \texttt{projects}, \texttt{design}, \texttt{rounds}, \texttt{generation}, \texttt{ai}, \texttt{testing}, \texttt{iteration}, \texttt{stakeholders}, \texttt{audit} และ \texttt{health} ทุก request ผ่านการตรวจ token การตรวจสิทธิ์ตาม permission การจำกัดอัตราการเรียก (rate limit) และ security header ก่อนถึง module ปลายทาง
+}
+
+\subsection{AI Job Processor Layer}
+\thaijustify{
+  งานที่ใช้เวลานาน ได้แก่ การร่าง prompt การสร้าง UI การร่าง user story และการวิเคราะห์ข้อเสนอแนะ ถูกส่งเข้าคิวของ BullMQ บน Redis แทนการประมวลผลใน request โดยตรง worker ดึงงานจากคิว เรียกโมเดลผ่าน CPE AI Gateway ซึ่งมี API แบบเดียวกับ OpenAI และส่งความคืบหน้ากลับไปยังหน้าจอผ่าน SSE ผู้ใช้จึงปิดหน้าจอแล้วกลับมาติดตามงานเดิมต่อได้ รายละเอียดอยู่ในหัวข้อ~\ref{sec:ai-pipeline}
+}
+
+\subsection{Data \& External Services Layer}
+\thaijustify{
+  PostgreSQL จัดเก็บข้อมูลทั้งหมดของระบบผ่าน Prisma (หัวข้อ~\ref{sec:er-diagram}) Redis ทำหน้าที่ทั้งคิวงานและ cache ของ response บริการภายนอกที่ใช้ ได้แก่ Google OAuth 2.0 สำหรับการเข้าสู่ระบบ และ CPE AI Gateway ของภาควิชาซึ่งเข้าถึงได้ผ่าน VPN ของมหาวิทยาลัยเท่านั้น
+}

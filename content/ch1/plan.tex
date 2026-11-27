@@ -1,0 +1,126 @@
+% !TeX root = ../../progress-sem1.tex
+% 1.x แผนการดำเนินงาน (Task breakdown + Gantt)
+\section{แผนการดำเนินงาน}
+\subsection{Task Breakdown}
+\begin{enumerate}
+  \item \textbf{Documentation}
+    \begin{itemize}
+      \item ศึกษาค้นคว้าหัวข้อโครงงาน
+      \item จัดทำเอกสาร Project Idea
+      \item เอกสารและงานวิจัยที่เกี่ยวข้อง
+      \item จัดทำเอกสาร Proposal report
+      \item นำเสนอ Proposal
+      \item จัดทำเอกสาร Progress report ภาคเรียนที่ 1
+      \item นำเสนอ Progress ภาคเรียนที่ 1
+      \item จัดทำเอกสาร Progress report ภาคเรียนที่ 2
+      \item นำเสนอ Progress ภาคเรียนที่ 2
+      \item จัดทำเอกสาร Final Report
+      \item นำเสนอ Final Defense
+    \end{itemize}
+
+  \item \textbf{Requirements Analysis \& System Design}
+    \begin{itemize}
+      \item สัมภาษณ์ผู้มีส่วนได้ส่วนเสีย
+      \item ระบุ Requirements
+      \item ระบุ Functional \& Non-Functional Requirements
+      \item จัดทำ Use Cases \& Sequence Diagram
+      \item วางโครงสร้าง System Architecture
+      \item วางโครงสร้าง AI Workflow \& Prompt Architecture
+      \item ออกแบบ Database
+      \item ออกแบบ API Design
+      \item ออกแบบ UI/UX Design (User Flow \& Wireframe)
+      \item System prototype (PoC)
+    \end{itemize}
+
+  \item \textbf{M0: Foundation}
+    \begin{itemize}
+      \item ระบุกลุ่มเป้าหมาย ขอบเขต และ MVP
+      \item กำหนด data model (workspace, project, story, variant, session, task, feedback, round, report)
+      \item เลือก architecture: auth, LLM provider, prototype rendering, hosting
+      \item สำรวจและเลือก design system และ UI kit
+      \item กำหนด requirements ด้าน PDPA และข้อความขอ consent
+      \item ตั้งค่า CI/CD, environments และ event analytics
+      % \item การกำหนดดัชนีชี้วัดผล และแผนการดำเนินงาน
+    \end{itemize}
+
+  \item \textbf{M1: Secure Access}
+    \begin{itemize}
+      \item จัดทำ Landing page
+      \item จัดทำ Register page
+      \item การยืนยันตัวตนผ่านอีเมล
+      \item การเข้าสู่ระบบพร้อมระบบจัดการข้อผิดพลาด
+      \item ระบบรีเซ็ตรหัสผ่าน
+      \item จัดทำระบบ routing ตามบทบาทของผู้ใช้
+      \item ระบบควบคุมการเข้าถึง
+    \end{itemize}
+
+  \item \textbf{M2: Project Setup}
+    \begin{itemize}
+      \item ระบบสร้าง workspace
+      \item ระบบสร้างโปรเจกต์
+      \item ฟอร์มกำหนดความต้องการทางการออกแบบ
+      \item ระบบจัดเก็บความต้องการทางการออกแบบเพื่อใช้เป็น reusable AI context
+    \end{itemize}
+
+  \item \textbf{M3: AI Design Generation}
+    \begin{itemize}
+      \item การสร้าง User story และ Problem statement
+      \item เครื่องมือสร้างคำสั่งที่รวมความต้องการทางการออกแบบและ user story
+      \item การสร้าง two-alternative UI
+      \item การปรับปรุง UI (Chat-based)
+      \item การดูตัวอย่างรูปแบบหน้าจอ
+      \item การอนุมัติและมอบหมายงานให้ผู้เข้าร่วมทดสอบ
+      \item การเริ่มเซสชันการทดสอบ
+      % \item ชุดข้อมูลสำหรับการประเมินคุณภาพผลลัพธ์ของ AI
+    \end{itemize}
+
+  \item \textbf{M4: Testing Space}
+    \begin{itemize}
+      \item การเข้าสู่เซสชันด้วยรหัสหรือลิงก์ พร้อมระบบตรวจสอบความถูกต้องของอายุการใช้งาน
+      \item สถานะสิ้นสุดของระบบ
+      \item การขอความยินยอมตามกฎหมายคุ้มครองข้อมูลส่วนบุคคล (PDPA) พร้อมระบบบันทึกประวัติการให้ความยินยอม
+      \item การกำหนดผู้ใช้งานให้เข้าร่วมการทดสอบ
+      \item การแนะนำการใช้งานเครื่องมือทดสอบสำหรับผู้ใช้ใหม่
+      \item ระบบทำภารกิจพร้อมการบันทึกพฤติกรรมการโต้ตอบของผู้ใช้
+      \item การแสดงความคิดเห็น การระบุตำแหน่งคอมโพเนนต์ การแสดงความคิดเห็นทั้งหน้าจอ หรือการข้ามการแสดงความคิดเห็น
+      \item วงจรการทำภารกิจที่เหลืออยู่จนกระทั่งสิ้นสุดการทดสอบของผู้ทดสอบ
+      \item การทดสอบข้ามเบราว์เซอร์
+    \end{itemize}
+
+  \item \textbf{M5: Feedback}
+    \begin{itemize}
+      \item การติดตามเซสชันการทดสอบ
+      \item การรวบรวมและประมวลผลฟีดแบ็ก
+      \item การวิเคราะห์ด้วย AI การหาประเด็นหลัก การติดป้ายกำกับ และการสรุปผล
+      \item หน้าจอเพื่อการตรวจสอบของนักออกแบบ การเปลี่ยนป้ายกำกับ การรวม การแยก การจดบันทึก และการทำเครื่องหมาย "ไม่แก้ไข" พร้อมระบุเหตุผล
+      \item วงจรการอนุมัติหรือการปรับปรุงแก้ไข
+      \item การนำฟีดแบ็กที่เลือกไปป้อนเป็นพรอมต์สำหรับรอบถัดไป
+      \item การตัดสินใจสิ้นสุดเซสชัน การทำเวอร์ชันของรอบการทำงาน และประวัติการทำงาน
+      \item การทดสอบวงจรการทำงานแบบต้นทางถึงปลายทาง
+    \end{itemize}
+
+  \item \textbf{M6: Stakeholder Report}
+    \begin{itemize}
+      \item รายการโปรเจกต์ (แบบอ่านอย่างเดียว สำหรับงานที่อนุมัติแล้วเท่านั้น)
+      \item มุมมองผู้ใช้งานที่แตกต่างกัน
+      \item การส่งมอบงานให้นักพัฒนา
+      \item สถานะสำหรับผู้จัดการโครงการ
+      \item เครื่องมือสร้างรายงาน
+      \item การจัดทำรายงานเฉพาะสำหรับแต่ละบทบาท
+      \item การส่งออกและการแชร์รายงาน
+    \end{itemize}
+
+  \item \textbf{M7: Pilot and Launch}
+    \begin{itemize}
+      \item ทดสอบ E2E และ UAT
+      \item ทดสอบ Security test และ PDPA audit
+      \item ทดสอบ Load test ด้วยผู้ทดสอบพร้อมกัน
+      \item ทดลองใช้งานกับทีมจริง 2–3 ทีมและเก็บข้อเสนอแนะ
+      \item จัดทำคู่มือการใช้งาน การเริ่มต้นใช้งาน และกระบวนการสนับสนุน
+      \item ติดตามระบบและแดชบอร์ดตัวชี้วัดทางธุรกิจ
+      \item Go live
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Gantt Chart}
+\input{content/ch1/gantt-tables}

@@ -1,0 +1,81 @@
+% !TeX program = xelatex
+% !BIB program = biber
+%%%%%%%%%%%%%%%%%%%%%%%% TEMPLATE INFO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%:     Template Name = cpe-thesis-th
+%:     Version Name  = th-vectier-1.1
+%:     Created by:
+%:       - Peerapon Siripongwutikorn (peerapon@cpe.kmutt.ac.th), 2016-2020
+%:
+%: This is a LaTeX template for use in CPE, KMUTT report and thesis.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%: Instructions:
+%: Run at the command line, run: xelatex report.tex  (then biber report, then xelatex twice)
+%: Note: Run a few times to generate the output pdf file
+%:
+%%%%%%%%%%%%%%%%%%%%%%%%%% FILE INFO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%:     File name = report.tex
+%:     Authors:
+%:       - Jatetanan Kanchanawat
+%:       - Krid Hepakrone
+%:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% REPORT START %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%: NOTE: cpe-thesis-th loads `report`, which only supports 10/11/12pt, so the
+%: old `14pt` option was silently ignored. Body size is set below instead.
+\documentclass[a4paper,oneside]{cpe-thesis-th}
+
+%: FROZEN: the first report (project proposal) as submitted, before the progress
+%: report format. Its text lives in reports/proposal/ and is not edited any more.
+%: Class-default layout, 16pt body, own report-info (shared preamble only).
+\def\reportbodysize{16pt}
+\input{config/preamble}
+
+\input{reports/proposal/config/report-info}
+
+%%%%%%%%%%%%%%%%% Front Page + Signature Page %%%%%%%%%%%%%%%%%%
+\begin{document}
+\input{reports/proposal/chapters/00-frontmatter}
+
+%%%%%%%%%%%%%%%%%%%%%%% Main body %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{reports/proposal/chapters/01-introduction}
+\input{reports/proposal/chapters/02-literature-review}
+\input{reports/proposal/chapters/03-methodology}
+\input{reports/proposal/chapters/04-results}
+\input{reports/proposal/chapters/05-conclusion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%% Bibliography %%%%%%%%%%%%%%%%%%%%%%%%%
+%: Comment this in your report to show only references you have
+%: cited. Otherwise, all the references below will be shown.
+% \nocite{*}
+
+% Use the kmutt.bst for bibtex bibliography style
+% You must have cpe.bib and string.bib in the correct directory
+% You may go to file .bbl to manually edit the bib items.
+
+%: Sept, 2021 by Thanin
+%: Improve url breaks to prevent unnecessary big white spaces in some cases
+\makeatletter
+\g@addto@macro{\UrlBreaks}{\UrlOrds}
+\makeatother
+
+%: July, 2024 by Jatetanan
+%: Add biblatex for managing bibs
+%: Uncomment this if you're using biblatex
+\printbibliography[heading=bibintoc,title={บรรณานุกรม}]
+
+%: Uncomment \bibliographystyle and \bibliography if you're not using biblatex
+
+%: References style
+%: Examples: \bibliographystyle{bibstyle/kmutt}
+% \bibliographystyle{bib/ieee}
+
+%: References files
+%: Examples: \bibliography{example/string,example/string2,example/cpe}
+% \bibliography{bib/codern}
+
+\input{reports/proposal/chapters/appendix}
+
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%% REPORT END %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

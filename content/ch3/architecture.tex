@@ -1,0 +1,42 @@
+% !TeX root = ../../progress-sem1.tex
+% 3.x สถาปัตยกรรมโดยภาพรวมของระบบ
+\section{สถาปัตยกรรมโดยภาพรวมของระบบ}
+\begin{figure}[H]
+  \centering
+  \includegraphics[
+    width=0.8\linewidth,
+    height=\textheight,
+    keepaspectratio
+  ]{figures/ch3-methodology/sys-arch3.png}
+  \caption{System architecture}
+  \label{fig:tech-stack-system-architecture}
+  \thaijustify{ภาพแสดงสถาปัตยกรรมระบบโดยแบ่งออกเป็น Client, Frontend, Backend, AI Job Processor, Database และ External Services โดย Frontend พัฒนาด้วย Next.js และสื่อสารกับ Backend ผ่าน REST API และ SSE (Server-Sent Events) ซึ่งช่วยให้ Server สามารถส่งข้อมูลและการอัปเดตแบบ Real-time ไปยัง Client ได้โดยไม่ต้องส่ง Request ใหม่ ขณะที่ Backend ซึ่งพัฒนาด้วย NestJS ทำหน้าที่จัดการสิทธิ์ ข้อมูลโครงการ การทดสอบ Feedback รายงาน และกระบวนการ AI โดยงานที่ต้องใช้เวลาประมวลผลจะถูกส่งผ่าน BullMQ ไปยัง AI Job Processor และเชื่อมต่อกับ CPE AI Gateway สำหรับการประมวลผลด้วย AI}
+\end{figure}
+
+\input{content/ch3/architecture-layers}
+
+\subsection{เทคโนโลยีที่ใช้ในแต่ละส่วน}
+\thaijustify{
+  ซอร์สโค้ดทั้งหมดจัดเก็บใน repository เดียวแบบ monorepo จัดการด้วย Turborepo และ pnpm แบ่งเป็นสองแอปพลิเคชัน คือ frontend และ backend เทคโนโลยีที่ใช้ในแต่ละส่วนแสดงในตารางที่~\ref{tab:tech-stack}
+}
+\begin{table}[H]
+  \centering
+  \caption{เทคโนโลยีที่ใช้ในแต่ละส่วนของระบบ}
+  \label{tab:tech-stack}
+  \small
+  \begin{tabularx}{\linewidth}{|>{\RaggedRight\arraybackslash}p{0.2\linewidth}|>{\RaggedRight\arraybackslash}p{0.3\linewidth}|>{\RaggedRight\arraybackslash}X|}
+    \hline
+    \textbf{ส่วนของระบบ} & \textbf{เทคโนโลยี} & \textbf{หน้าที่} \\ \hline
+    Frontend & Next.js 16, React 19, TypeScript & หน้าจอของผู้ใช้ทุกบทบาท \\ \hline
+    UI library & shadcn/ui (Radix UI), Tailwind CSS, Hugeicons & component และไอคอนตาม design system ของแพลตฟอร์ม \\ \hline
+    Backend & NestJS 11, TypeScript & REST API, การยืนยันตัวตน, การควบคุมสิทธิ์ และงาน AI \\ \hline
+    ฐานข้อมูล & PostgreSQL 17, Prisma 7 & จัดเก็บข้อมูลทั้งหมด และจัดการ migration ของ schema \\ \hline
+    Cache และคิวงาน & Redis 7, BullMQ & cache ของ response และคิวงานที่ใช้เวลานาน เช่น การสร้าง UI \\ \hline
+    การสื่อสารแบบ real-time & Server-Sent Events (SSE) & ส่งความคืบหน้าและความคิดของโมเดลระหว่างประมวลผลไปยังหน้าจอ \\ \hline
+    การยืนยันตัวตน & Passport (Google OAuth 2.0), JWT & เข้าสู่ระบบและออก access token กับ refresh token \\ \hline
+    บริการ AI & CPE AI Gateway (API แบบเดียวกับ OpenAI) & muse-glimmer-30b สร้าง UI และ qwen3.8-27b วิเคราะห์ข้อเสนอแนะ ร่าง user story, prompt และ persona \\ \hline
+    เอกสาร API & Swagger (OpenAPI) & เอกสารและเครื่องมือทดลองเรียก API \\ \hline
+    การทดสอบ & Jest & unit test และ end-to-end test ของ backend \\ \hline
+    CI & GitHub Actions & ตรวจชื่อ pull request, lint และ build ทุก pull request \\ \hline
+  \end{tabularx}
+\end{table}

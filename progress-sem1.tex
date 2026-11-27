@@ -1,0 +1,64 @@
+% !TeX program = xelatex
+% !BIB program = biber
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%: Progress report, semester 1 (รายงานความก้าวหน้า ภาคการศึกษาที่ 1)
+%: Layout reference: Progress_Sem1_THAI_Example1.pdf (see AGENTS.md)
+%: Template: cpe-thesis-th (Peerapon Siripongwutikorn, CPE KMUTT)
+%:
+%: This file is the spine of the report: it only picks the style, the
+%: front matter and the order of the content files. Text lives in content/.
+%: Build: latexmk progress-sem1.tex   (XeLaTeX + Biber)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,oneside]{cpe-thesis-th}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Report kind %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\reportbodysize{14.3pt}           % body size measured from the example PDF
+\def\termphrase{ในภาคการศึกษาที่ 1}    % used in chapter intros, e.g. content/ch3/intro.tex
+
+\input{config/preamble}
+\input{config/styles/progress}
+\input{config/report-info}
+
+\begin{document}
+\input{frontmatter/progress}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Chapter 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{บทนำ}
+\input{content/ch1/background}
+\input{content/ch1/objectives}
+\input{content/ch1/scope}
+\input{content/ch1/plan}
+\input{content/ch1/deliverables}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Chapter 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{ทฤษฎีความรู้และงานที่เกี่ยวข้อง}
+\input{content/ch2/intro}
+\input{content/ch2/theory}
+\input{content/ch2/tools-technology}
+\input{content/ch2/related-work}
+\input{content/ch2/summary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Chapter 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{การออกแบบและวิธีการดำเนินงาน}
+\input{content/ch3/intro}
+\input{content/ch3/requirements-survey}
+\input{content/ch3/requirements}
+\input{content/ch3/system-design}
+\input{content/ch3/architecture}
+\input{content/ch3/ui-prototype}
+\input{content/ch3/ai-pipeline}
+\input{content/ch3/development-sem1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Chapter 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{ผลการดำเนินงาน}
+\input{content/ch4/sem1/intro}
+\input{content/ch4/sem1/status-vs-plan}
+\input{content/ch4/sem1/evaluation}
+\input{content/ch4/sem1/problems}
+\input{content/ch4/sem1/next-plan}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Back matter %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{config/bibliography}
+\input{content/appendix}
+
+\end{document}

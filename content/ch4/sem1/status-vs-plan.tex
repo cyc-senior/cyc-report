@@ -1,0 +1,53 @@
+% !TeX root = ../../../progress-sem1.tex
+% 4.x สรุปผลการดำเนินงานเทียบกับแผน (semester 1)
+\section{สรุปผลการดำเนินงานเทียบกับแผน}
+\thaijustify{
+  ตารางที่~\ref{tab:progress-status} สรุปสถานะของงานใน milestone M0 ถึง M3 ซึ่งเป็นแผนของภาคการศึกษาที่ 1 ณ วันที่ 26 พฤศจิกายน 2569 โดยพิจารณาจากซอร์สโค้ดใน branch หลักของ repository
+}
+\begingroup
+\small
+\begin{xltabular}{\linewidth}{|>{\RaggedRight\arraybackslash}X|>{\RaggedRight\arraybackslash}p{0.15\linewidth}|>{\RaggedRight\arraybackslash}p{0.36\linewidth}|}
+  \caption{สถานะของงานในภาคการศึกษาที่ 1}\label{tab:progress-status}\\
+  \hline
+  \textbf{งาน} & \textbf{สถานะ} & \textbf{หมายเหตุ} \\ \hline
+  \endfirsthead
+  \multicolumn{3}{l}{\textit{ตารางที่ \thetable\ (ต่อ)}}\\
+  \hline
+  \textbf{งาน} & \textbf{สถานะ} & \textbf{หมายเหตุ} \\ \hline
+  \endhead
+  \multicolumn{3}{|l|}{\textbf{M0: Foundation}} \\ \hline
+  ระบุกลุ่มเป้าหมาย ขอบเขต และ MVP & เสร็จแล้ว & บทที่ 1 \\ \hline
+  กำหนด data model & เสร็จแล้ว & 34 ตาราง ครอบคลุมทุก milestone (หัวข้อ~\ref{sec:er-diagram}) \\ \hline
+  เลือก architecture: auth, LLM provider, prototype rendering, hosting & ทำบางส่วน & เลือกแล้วทุกส่วนยกเว้นบริการที่ใช้ deploy \\ \hline
+  สำรวจและเลือก design system และ UI kit & เสร็จแล้ว & shadcn/ui สำหรับแพลตฟอร์ม และ UI kit shadcn/ui กับ MUI สำหรับ AI \\ \hline
+  กำหนด requirements ด้าน PDPA และข้อความขอ consent & เสร็จแล้ว & เก็บความยินยอมพร้อมเวอร์ชันของข้อความ \\ \hline
+  ตั้งค่า CI/CD, environments และ event analytics & ทำบางส่วน & มี CI และสภาพแวดล้อมสำหรับพัฒนาแล้ว ยังไม่มี CD และ event analytics \\ \hline
+  การกำหนดดัชนีชี้วัดผล และแผนการดำเนินงาน & เสร็จแล้ว &  \\ \hline
+  \multicolumn{3}{|l|}{\textbf{M1: Secure Access}} \\ \hline
+  จัดทำ Landing page & เสร็จแล้ว &  \\ \hline
+  จัดทำ Register page & ทำบางส่วน & หน้าจอเสร็จแล้ว backend อยู่ใน branch แยก \\ \hline
+  การยืนยันตัวตนผ่านอีเมล & ทำบางส่วน & อยู่ระหว่างพัฒนาใน branch แยก \\ \hline
+  การเข้าสู่ระบบพร้อมระบบจัดการข้อผิดพลาด & ทำบางส่วน & เข้าสู่ระบบด้วย Google ได้แล้ว อีเมลและรหัสผ่านอยู่ใน branch แยก \\ \hline
+  ระบบรีเซ็ตรหัสผ่าน & ทำบางส่วน & หน้าจอเสร็จแล้ว backend อยู่ใน branch แยก \\ \hline
+  ระบบควบคุมการเข้าถึง & เสร็จแล้ว & ควบคุมสิทธิ์ตาม permission ของแต่ละบทบาท \\ \hline
+  จัดทำระบบ routing ตามบทบาทของผู้ใช้ & ทำบางส่วน & backend ตรวจสิทธิ์ตามบทบาทแล้ว หน้าจอของ Client, Developer และ PM อยู่ใน M6 \\ \hline
+  ทดสอบระบบยืนยันตัวตนและการควบคุมการเข้าถึง & ทำบางส่วน & มี unit test และ end-to-end test ของ auth และสิทธิ์ ยังขาดส่วนอีเมลและรหัสผ่าน \\ \hline
+  \multicolumn{3}{|l|}{\textbf{M2: Project Setup}} \\ \hline
+  ระบบสร้าง workspace & เสร็จแล้ว & รวมการเชิญสมาชิกและรูปประจำ workspace \\ \hline
+  ระบบสร้างโปรเจกต์ & เสร็จแล้ว & รวมการกำหนดสมาชิกและบทบาทในโปรเจกต์ \\ \hline
+  ฟอร์มกำหนดความต้องการทางการออกแบบ & เสร็จแล้ว &  \\ \hline
+  ระบบจัดเก็บความต้องการทางการออกแบบเพื่อใช้เป็น reusable AI context & เสร็จแล้ว & เก็บเวอร์ชันของ design intent ที่ใช้ในแต่ละงาน \\ \hline
+  \multicolumn{3}{|l|}{\textbf{M3: AI Design Generation}} \\ \hline
+  การสร้าง User story และ Problem statement & เสร็จแล้ว & การให้ AI ร่าง user story มีเฉพาะ backend \\ \hline
+  เครื่องมือสร้างคำสั่งที่รวมความต้องการทางการออกแบบและ user story & เสร็จแล้ว &  \\ \hline
+  การสร้าง two-alternative UI & เสร็จแล้ว & มีการตรวจและให้โมเดลแก้ไขอัตโนมัติ \\ \hline
+  การปรับปรุง UI (Chat-based) & เสร็จแล้ว & เก็บประวัติแต่ละเวอร์ชัน \\ \hline
+  การดูตัวอย่างรูปแบบหน้าจอ & เสร็จแล้ว &  \\ \hline
+  การอนุมัติและมอบหมายงานให้ผู้เข้าร่วมทดสอบ & ทำบางส่วน & อนุมัติ variant ได้แล้ว การมอบหมายงานมีเฉพาะ backend \\ \hline
+  การเริ่มเซสชันการทดสอบ & ทำบางส่วน & backend สร้างลิงก์และรหัสได้แล้ว หน้าจอยังไม่มี \\ \hline
+  ชุดข้อมูลสำหรับการประเมินคุณภาพผลลัพธ์ของ AI & ยังไม่เริ่ม &  \\ \hline
+\end{xltabular}
+\endgroup
+\thaijustify{
+  นอกจากงานตามแผนแล้ว ทีมได้พัฒนาส่วน backend ของ M4 ถึง M6 ไว้ล่วงหน้า ได้แก่ เซสชันการทดสอบพร้อมการเก็บความยินยอม การบันทึกภารกิจ พฤติกรรม และข้อเสนอแนะของผู้เข้าร่วมทดสอบ การวิเคราะห์ข้อเสนอแนะด้วย AI การจัดการประเด็นและบันทึกการตัดสินใจ รวมถึงมุมมองและรายงานสำหรับผู้มีส่วนได้ส่วนเสีย ส่วนหน้าจอของงานเหล่านี้อยู่ในแผนของภาคการศึกษาที่ 2
+}
