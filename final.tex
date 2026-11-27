@@ -1,0 +1,64 @@
+% !TeX program = xelatex
+% !BIB program = biber
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%: Final report (ปริญญานิพนธ์ฉบับสมบูรณ์)
+%: PROVISIONAL: no final report example PDF yet. Uses the progress layout
+%: (config/styles/final.tex), adds an acknowledgement, a results chapter
+%: and a conclusion chapter.
+%: When the example arrives, follow AGENTS.md ("New report type from an example PDF").
+%: Build: latexmk final.tex   (XeLaTeX + Biber)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,oneside]{cpe-thesis-th}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Report kind %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\reportbodysize{14.3pt}
+\def\termphrase{ตลอดโครงงาน}
+
+\input{config/preamble}
+\input{config/styles/final}
+\input{config/report-info}
+
+\begin{document}
+\input{frontmatter/final}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Chapter 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{บทนำ}
+\input{content/ch1/background}
+\input{content/ch1/objectives}
+\input{content/ch1/scope}
+\input{content/ch1/plan}
+\input{content/ch1/deliverables}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Chapter 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{ทฤษฎีความรู้และงานที่เกี่ยวข้อง}
+\input{content/ch2/intro}
+\input{content/ch2/theory}
+\input{content/ch2/tools-technology}
+\input{content/ch2/related-work}
+\input{content/ch2/summary}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Chapter 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{การออกแบบและวิธีการดำเนินงาน}
+\input{content/ch3/intro}
+\input{content/ch3/requirements-survey}
+\input{content/ch3/requirements}
+\input{content/ch3/system-design}
+\input{content/ch3/architecture}
+\input{content/ch3/ui-prototype}
+\input{content/ch3/ai-pipeline}
+\input{content/ch3/development-sem1}
+\input{content/ch3/development-sem2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Chapter 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{ผลการดำเนินงาน}
+\input{content/ch4/final/results}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Chapter 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{บทสรุป}
+\input{content/ch5/conclusion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Back matter %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{config/bibliography}
+\input{content/appendix}
+
+\end{document}

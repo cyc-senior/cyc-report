@@ -1,0 +1,37 @@
+% !TeX root = ../progress-sem1.tex
+% English title + committee signature page. Values: config/report-info.tex
+\newcommand{\sigline}[2]{%
+  \makebox[0.62\textwidth]{\dotfill} & #2 \\
+  \makebox[0.62\textwidth]{(#1)} & \\[0.9cm]}
+\begin{titlepage}
+  \thispagestyle{empty}
+  \setlength{\parindent}{0pt}
+  \centering
+  \vspace*{0.3cm}
+  \disstitleone\par
+  \vspace{1.2cm}
+  \begin{tabular}{@{}l@{\hspace{1.2em}}l@{}}
+    \engauthorone   \\
+    \engauthortwo   \\
+    \engauthorthree \\
+    \engauthorfour  \\
+  \end{tabular}\par
+  \vspace{1.6cm}
+  A Project Submitted in Partial Fulfillment of the Requirements for\par
+  the Degree of Bachelor of Engineering (Computer Engineering)\par
+  Faculty of Engineering\par
+  King Mongkut's University of Technology Thonburi\par
+  \dissyear\par
+  \vspace{1.2cm}
+  {\raggedright Project Committee\par}
+  \vspace{1.0cm}
+  \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}l@{}}
+    \sigline{\engadvisorsig}{Project Advisor}
+    \sigline{\engcoadvisorsig}{Project Co-Advisor}
+    \sigline{\engcommitteeone}{Committee Member}
+    \sigline{\engcommitteetwo}{Committee Member}
+  \end{tabular*}\par
+  \vfill
+  Copyright reserved\par
+  \vspace*{2.5cm}
+\end{titlepage}

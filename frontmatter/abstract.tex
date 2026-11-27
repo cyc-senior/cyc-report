@@ -1,0 +1,62 @@
+% !TeX root = ../progress-sem1.tex
+% Abstract + บทคัดย่อ pages: info table layout here, text in content/abstract/{en,th}.tex
+\pagenumbering{roman}
+\setcounter{page}{1}
+\pagestyle{plain}
+
+\newcommand{\infotable}[1]{%
+  \begin{flushleft}
+    \renewcommand{\arraystretch}{1.0}
+    \begin{tabular}{@{}>{\bfseries}p{0.24\textwidth}@{}p{0.74\textwidth}@{}}
+      #1
+    \end{tabular}
+  \end{flushleft}}
+\newcommand{\memberline}[2]{\makebox[6.5em][l]{#1}#2}
+
+\clearpage
+\infotable{
+  Project Title  & \disstitleone \\
+  Credits        & \disscredit \\
+  Members        & \memberline{\dissstudentidone}{\engauthorone} \\
+                 & \memberline{\dissstudentidtwo}{\engauthortwo} \\
+                 & \memberline{\dissstudentidthree}{\engauthorthree} \\
+                 & \memberline{\dissstudentidfour}{\engauthorfour} \\
+  Project Advisor & \engadvisor \\
+  Project Co-Advisor & \engcoadvisor \\
+  Program        & \dissdegree \\
+  Field of Study & \fieldofstudy \\
+  Department     & \department \\
+  Faculty        & \faculty \\
+  Academic Year  & \dissyear \\
+}
+\vspace{0.8cm}
+\begin{center}\textbf{Abstract}\end{center}
+\begin{otherlanguage}{english}
+\input{content/abstract/en}
+\end{otherlanguage}
+
+\vspace{0.6em}
+\noindent\textbf{Keywords:} \engkeywords
+
+\clearpage
+\infotable{
+  หัวข้อปริญญานิพนธ์ & \thaidisstitleone \\
+  หน่วยกิต          & \disscredit \\
+  ผู้เขียน           & \memberline{\dissstudentidone}{\thaidissauthorone} \\
+                    & \memberline{\dissstudentidtwo}{\thaidissauthortwo} \\
+                    & \memberline{\dissstudentidthree}{\thaidissauthorthree} \\
+                    & \memberline{\dissstudentidfour}{\thaidissauthorfour} \\
+  อาจารย์ที่ปรึกษา    & \thaidissadvisor \\
+  อาจารย์ที่ปรึกษาร่วม & \thaidisscoadvisor \\
+  หลักสูตร          & \thaidissdegree \\
+  สาขาวิชา          & \thaifieldofstudy \\
+  ภาควิชา           & \thaidepartment \\
+  คณะ              & \thaifaculty \\
+  ปีการศึกษา         & \thaidissyear \\
+}
+\vspace{0.8cm}
+\begin{center}\textbf{บทคัดย่อ}\end{center}
+\input{content/abstract/th}
+
+\vspace{0.6em}
+\noindent\textbf{คำสำคัญ:} \thaikeywords

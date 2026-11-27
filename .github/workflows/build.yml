@@ -1,0 +1,85 @@
+name: Build report PDF
+
+# Push/PR: build the current report (and any report whose spine file changed).
+# Manual run (Actions -> Build report PDF -> Run workflow): pick which report(s) to build.
+# The PDFs are attached to the run as artifacts ("Artifacts" at the bottom of the run page).
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['**.md']
+  pull_request:
+    paths-ignore: ['**.md']
+  workflow_dispatch:
+    inputs:
+      report:
+        description: Report to build
+        type: choice
+        default: progress-sem1
+        options: [progress-sem1, progress-sem2, final, proposal, all]
+
+env:
+  # The report the team is writing now. Keep in sync with @default_files in .latexmkrc.
+  CURRENT_REPORT: progress-sem1
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pick:
+    runs-on: ubuntu-latest
+    outputs:
+      reports: ${{ steps.pick.outputs.reports }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: pick
+        env:
+          INPUT: ${{ inputs.report }}
+          EVENT: ${{ github.event_name }}
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          all='["proposal","progress-sem1","progress-sem2","final"]'
+          if [ "$EVENT" = workflow_dispatch ]; then
+            if [ "$INPUT" = all ]; then list="$all"; else list="[\"$INPUT\"]"; fi
+          else
+            names="$CURRENT_REPORT"
+            if [ -n "$BASE" ] && git cat-file -e "$BASE" 2>/dev/null; then
+              for r in proposal progress-sem2 final; do
+                if git diff --name-only "$BASE" HEAD | grep -qx "$r.tex"; then names="$names $r"; fi
+              done
+            fi
+            list=$(printf '%s\n' $names | jq -R . | jq -sc .)
+          fi
+          echo "reports=$list" >> "$GITHUB_OUTPUT"
+          echo "Building: $list"
+
+  build:
+    needs: pick
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        report: ${{ fromJSON(needs.pick.outputs.reports) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile ${{ matrix.report }}.tex (XeLaTeX + Biber)
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: ${{ matrix.report }}.tex
+          latexmk_use_xelatex: true
+          args: -file-line-error -halt-on-error -interaction=nonstopmode
+      - name: Count \todo placeholders left
+        if: always()
+        run: |
+          n=$(grep -rho '\\todo{' content frontmatter | wc -l || true)
+          echo "::notice title=${{ matrix.report }}::$n \\todo placeholders left in content/ and frontmatter/"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ${{ matrix.report }}-pdf
+          path: |
+            ${{ matrix.report }}.pdf
+            ${{ matrix.report }}.log
+          if-no-files-found: warn

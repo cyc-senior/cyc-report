@@ -1,4 +1,4 @@
-% !TeX root = ../report.tex
+% !TeX root = ../progress-sem1.tex
 % Packages, fonts, margins, captions, listings and macros (moved from report.tex)
 %%%%%%%%%%%%%%%%%%%%%% Packages and Configs %%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -144,8 +144,10 @@
 %: TH Sarabun New is loaded with Scale=1.23, so the size LaTeX is asked for
 %: is divided by 1.23 to make the rendered size come out at exactly this value.
 %: Change \bodyfontsize to resize the whole document (headings follow).
+%: Each entry file (proposal.tex, progress-sem1.tex, ...) sets \reportbodysize
+%: before \input{config/preamble}; 14.3pt matches the progress report example.
 \newdimen\bodyfontsize
-\bodyfontsize=14.3pt   % matches the progress report example (was 16pt)
+\ifdefined\reportbodysize \bodyfontsize=\reportbodysize \else \bodyfontsize=14.3pt \fi
 
 \makeatletter
 %: \thsz{\cmd}{size*10}{baseline*10} sets \cmd to a fixed \fontsize. The two numbers
