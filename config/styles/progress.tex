@@ -35,6 +35,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Chapter headings %%%%%%%%%%%%%%%%%%%%%%%%%%
 \thsz\thsz@chapter{134}{160}
+%: Cover page text uses the chapter-title size, regular weight (frontmatter/cover.tex).
+\def\coverfont{\normalfont\thsz@chapter}
 \def\@makechapterhead#1{%
   \vspace*{-25\p@}%
   {\centering\normalfont\thsz@chapter\bfseries \@chapapp{}~\thechapter\hskip 5\p@ #1\par}%
