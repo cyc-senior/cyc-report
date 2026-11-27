@@ -20,7 +20,10 @@
   \fi
 }
 
+%: Make longtable pages end with \vfil instead of \vss. Newer longtable releases
+%: (e.g. TeX Live on CI) changed \LT@output, so the patch may not apply; then keep
+%: longtable's own glue and only warn, rather than stopping the build.
 \patchcmd{\LT@output}{\copy\LT@foot\vss}{\copy\LT@foot\vfil}{}
-  {\PackageError{report-compat}{Cannot update longtable final-page glue}{Check the installed longtable version.}}
+  {\PackageWarningNoLine{report-compat}{Cannot update longtable final-page glue; using longtable's default}}
 \patchcmd{\LT@output}{\copy\LT@foot\vss}{\copy\LT@foot\vfil}{}
-  {\PackageError{report-compat}{Cannot update longtable page glue}{Check the installed longtable version.}}
+  {\PackageWarningNoLine{report-compat}{Cannot update longtable page glue; using longtable's default}}
