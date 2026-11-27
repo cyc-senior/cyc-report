@@ -20,7 +20,7 @@
 
 \subsection{AI Job Processor Layer}
 \thaijustify{
-  งานที่ใช้เวลานาน ได้แก่ การร่าง prompt การสร้าง UI การร่าง user story และการวิเคราะห์ข้อเสนอแนะ ถูกส่งเข้าคิวของ BullMQ บน Redis แทนการประมวลผลใน request โดยตรง worker ดึงงานจากคิว เรียกโมเดลผ่าน CPE AI Gateway ซึ่งมี API แบบเดียวกับ OpenAI และส่งความคืบหน้ากลับไปยังหน้าจอผ่าน SSE ผู้ใช้จึงปิดหน้าจอแล้วกลับมาติดตามงานเดิมต่อได้ รายละเอียดอยู่ในหัวข้อ~\ref{sec:ai-pipeline}
+  งานที่ใช้เวลานานถูกส่งเข้าคิวของ BullMQ บน Redis แทนการประมวลผลใน request โดยตรง โดยแบ่งเป็นสองคิว ได้แก่ คิว design-generation สำหรับการสร้าง UI variant และการสังเคราะห์ persona และคิว ai-task สำหรับการร่าง user story และการวิเคราะห์ข้อเสนอแนะ worker ดึงงานจากคิว เรียกโมเดลผ่าน CPE AI Gateway ซึ่งมี API แบบเดียวกับ OpenAI และส่งความคืบหน้ากลับไปยังหน้าจอผ่าน SSE ผู้ใช้จึงปิดหน้าจอแล้วกลับมาติดตามงานเดิมต่อได้ รายละเอียดอยู่ในหัวข้อ~\ref{sec:ai-pipeline}
 }
 
 \subsection{Data \& External Services Layer}

@@ -1,30 +1,48 @@
 % !TeX root = ../../progress-sem1.tex
 % Section 3.5: UI prototype, split like the example
 % (การออกแบบ UI / prototype ของผู้ใช้แต่ละกลุ่ม).
-% Input from chapters/03-methodology.tex.
+% Screens are exported from the Figma file "Hi-Fidelity Wireframe", page "[REFERENCE THIS PAGE] Hi-fi v2"
+% (copies on page "Happy flow"); file names in figures/ch3-methodology/ui/ start with the hi-fi screen number.
 
 \section{การออกแบบ User Interface Prototype}\label{sec:ui-prototype}
 \thaijustify{
-  ทีมออกแบบหน้าจอแบบ high-fidelity ด้วย Figma ก่อนพัฒนา โดยแบ่งตามกลุ่มผู้ใช้ของแพลตฟอร์ม
+  ทีมออกแบบหน้าจอแบบ high-fidelity ด้วย Figma ก่อนพัฒนา โดยแบ่งตามกลุ่มผู้ใช้ของแพลตฟอร์ม หน้าจอทั้งหมดใช้กรณีตัวอย่างเดียวกัน คือการพัฒนาระบบจองห้องศึกษาของหอสมุด มจธ. เพื่อให้เห็นการทำงานต่อเนื่องตั้งแต่การตั้งค่าโปรเจกต์จนถึงรายงาน ข้อมูลในหน้าจอ เช่น ชื่อบุคคล ตัวเลข และสีแบรนด์ของโปรเจกต์ตัวอย่าง เป็นข้อมูลสมมติ ลำดับการเปลี่ยนหน้าจอเป็นไปตาม user flow ในหัวข้อ~\ref{sec:user-flow} ภาพหน้าจอของแต่ละกลุ่มผู้ใช้อยู่ในภาคผนวก~\ref{app:ui-screens}
 }
 
 \subsection{การออกแบบ UI (User Interface)}
 \thaijustify{
-  หน้าจอของแพลตฟอร์มใช้ design system ที่สร้างบน shadcn/ui และ Tailwind CSS ไอคอนใช้ชุด Hugeicons ทั้งระบบ
-  \todo{โทนสี ตัวอักษร ขนาด spacing และ component หลักใน Figma พร้อมภาพ style guide}
+  หน้าจอของแพลตฟอร์มใช้ design system ที่สร้างบน shadcn/ui และ Tailwind CSS โดยทีมปรับชุด component ของ shadcn/ui ใน Figma ให้เป็น library กลางของทีม ไอคอนใช้ชุด Hugeicons ทั้งระบบ และข้อความบนหน้าจอเป็นภาษาอังกฤษเป็นหลัก องค์ประกอบหลักของ design system มีดังนี้
+  \begin{itemize}
+    \item \textbf{สีหลัก}\\
+      สีเขียวมะนาว (lime, \#9AE600) เป็นสีของปุ่มดำเนินการหลัก สีครามเข้ม (indigo, \#15095D) เป็นสีพื้นของแบรนด์ ใช้ในหน้าเข้าสู่ระบบ หน้าเข้าร่วมเซสชัน และสถานะว่าง ส่วนหน้าทำงานใช้พื้นขาวและสีเทา (neutral) ดังรูปที่~\ref{fig:ui-style}
+    \item \textbf{สีเสริม}\\
+      สีเสริมแต่ละสีมีความหมายเดียวทั้งระบบ ได้แก่ สีชมพูแทน Design A สีฟ้าแทน Design B สีเหลืองแทน UI สุดท้ายที่รวมแล้ว สีส้มแทนคำเตือนหรือแนวโน้มผิดปกติ และสีแดงแทนการกระทำที่อันตราย
+    \item \textbf{ตัวอักษร}\\
+      Space Grotesk สำหรับหัวข้อ IBM Plex Sans Thai สำหรับเนื้อหาและส่วนควบคุม ซึ่งรองรับภาษาไทย และ Geist Mono สำหรับรหัสและรหัสเซสชัน โดยกำหนด text style ไว้ 13 ระดับ
+  \end{itemize}
 }
+\begin{figure}[H]
+  \centering
+  \subfloat[สีหลัก]{\includegraphics[width=0.9\linewidth]{figures/ch3-methodology/ui/style-palette.jpg}}\\
+  \subfloat[สีเสริมและความหมาย]{\includegraphics[width=0.9\linewidth]{figures/ch3-methodology/ui/style-accent.jpg}}
+  \caption{ชุดสีของ design system}
+  \label{fig:ui-style}
+\end{figure}
 
 \subsection{User Interface Prototype ของ Designer}
 \thaijustify{
-  \todo{ภาพ prototype ของ Designer: dashboard, การสร้างโปรเจกต์และ design intent, user story, การตรวจ prompt, generation trace และหน้า refine}
+  หน้าจอของ Designer ใช้ sidebar ด้านซ้ายสำหรับนำทางระหว่าง workspace, โปรเจกต์ และขั้นตอนของ user story หน้าจอในช่วงตั้งค่าโปรเจกต์และสร้าง UI (รูปที่~\ref{fig:ui-designer-cycle}) ได้แก่ หน้ารวมโปรเจกต์ หน้ากำหนดความต้องการทางการออกแบบ ซึ่งมีการ์ดสรุปว่า AI มีข้อมูลอะไรแล้วบ้าง หน้าเขียน user story หน้าตรวจ structured prompt ที่ระบุความแตกต่างระหว่าง Design A และ B อย่างชัดเจน หน้าแสดงความคืบหน้าระหว่างสร้าง และหน้าปรับแก้ A/B ที่มีแชตอยู่ด้านซ้ายและหน้าจอตัวอย่างอยู่ด้านขวา ซึ่งเปลี่ยนขนาดหน้าจอตามอุปกรณ์ได้
+}
+\thaijustify{
+  หน้าจอในช่วงการทดสอบ (รูปที่~\ref{fig:ui-designer-testing}) ได้แก่ หน้าตั้งค่าภารกิจ สมมติฐานและคำถามเฉพาะจุด และเงื่อนไขการหยุดทดสอบ หน้าติดตามผู้เข้าร่วมทดสอบที่แสดงแนวโน้มจำนวนความคิดเห็นใหม่ในแต่ละรอบและแจ้งเตือนเมื่อแนวโน้มขึ้นลง หน้าตรวจประเด็นที่ AI จัดกลุ่มจากข้อเสนอแนะ และหน้าแก้ไขรายงานแยกตามบทบาทก่อนเผยแพร่ หน้าจอกลุ่มนี้ออกแบบไว้สำหรับการพัฒนาในภาคการศึกษาที่ 2
 }
 
 \subsection{User Interface Prototype ของ Usability Tester}
 \thaijustify{
-  \todo{ภาพ prototype ของผู้เข้าร่วมทดสอบ: หน้าเข้าร่วมเซสชัน, การให้ความยินยอม (PDPA), การทำภารกิจ และแบบฟอร์มข้อเสนอแนะ}
+  หน้าจอของผู้เข้าร่วมทดสอบไม่มี sidebar เพื่อให้จดจ่อกับภารกิจ และเรียกสองดีไซน์ว่า Design 1 และ Design 2 แทน A และ B ตามลำดับที่สุ่ม เพื่อไม่ให้ชื่อมีผลต่อความเห็น (รูปที่~\ref{fig:ui-tester}) ผู้เข้าร่วมทดสอบเห็นข้อมูลที่ระบบจะบันทึกและสิทธิ์ของตนก่อนให้ความยินยอม จากนั้นทำภารกิจบนทั้งสองดีไซน์ ตอบคำถามจาก AI ผ่านแชต และปักหมุดความคิดเห็นบนส่วนต่าง ๆ ของหน้าจอ
 }
 
 \subsection{User Interface Prototype ของ Client, Developer และ Project Manager}
 \thaijustify{
-  \todo{ภาพ prototype ของมุมมองผู้มีส่วนได้ส่วนเสีย: สถานะโปรเจกต์, handoff และรายงาน}
+  ผู้มีส่วนได้ส่วนเสียเห็นเฉพาะรายงานของบทบาทตนเองจากรอบที่อนุมัติแล้ว (รูปที่~\ref{fig:ui-stakeholder}) รายงานของ Client แสดงตัวชี้วัด UI สุดท้าย และสิ่งที่เปลี่ยนพร้อมลิงก์กลับไปยังข้อเสนอแนะต้นทาง เอกสารส่งมอบงานของ Developer แสดงข้อกำหนด component ตาม shadcn/ui โค้ด และความเสี่ยงทางเทคนิค ส่วนหน้าของ Project Manager แสดงความคืบหน้าของรอบการทดสอบ กำหนดการ และทรัพยากรที่ใช้
 }

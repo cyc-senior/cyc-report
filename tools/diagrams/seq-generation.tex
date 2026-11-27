@@ -1,0 +1,46 @@
+% Sequence: structured prompt drafting and A/B generation
+% Source of truth: cyc-monorepo apps/backend/src/modules/rounds, apps/backend/src/modules/generation
+% Build: cd tools/diagrams && xelatex seq-generation.tex && mv seq-generation.pdf ../../figures/ch3-methodology/
+\documentclass[border=4pt]{standalone}
+\input{seq-common}
+\begin{document}
+\begin{sequencediagram}
+  \newthread{designer}{Designer}
+  \newinst[2.3]{front}{Frontend}
+  \newinst[2.4]{back}{Backend API}
+  \newinst[1.2]{queue}{Redis/BullMQ}
+  \newinst[1.2]{worker}{AI Job Processor}
+  \newinst[1.9]{gateway}{CPE AI Gateway}
+  \newinst[1.0]{database}{PostgreSQL}
+  \msg{designer}{เปิดหน้า Review prompt}{front}
+  \msg{front}{SSE draft-prompt/events}{back}
+  \msg{back}{อ่าน user story, design intent, persona}{database}
+  \msg{back}{ขอ structured prompt (qwen3.8-27b)}{gateway}
+  \reply{gateway}{ความคิดและผลลัพธ์แบบ streaming}{back}
+  \reply{back}{สถานะและ prompt ที่ร่างแล้ว}{front}
+  \msg{designer}{ตรวจ แก้ไข และ Approve \& generate}{front}
+  \msg{front}{POST rounds, POST generation-jobs}{back}
+  \msg{back}{DesignRound, GenerationJob (QUEUED)}{database}
+  \msg{back}{เพิ่มงานเข้าคิว}{queue}
+  \reply{back}{jobId}{front}
+  \msg{front}{SSE generation-jobs/:jobId/events}{back}
+  \msg{queue}{ส่งงานให้ worker}{worker}
+  \msg{worker}{สถานะ RUNNING}{database}
+  \begin{sdblock}{opt}{ยังไม่ได้เลือก persona}
+    \msg{worker}{สังเคราะห์ persona artifact}{gateway}
+  \end{sdblock}
+  \begin{sdblock}{loop}{ทีละ variant (A แล้ว B)}
+    \msg{worker}{สร้างหน้าจอ HTML (muse-glimmer-30b)}{gateway}
+    \selfmsg{worker}{sanitize และตรวจ UI kit, สี, การเข้าถึง}
+    \begin{sdblock}{opt}{ไม่ผ่าน (แก้ได้ไม่เกิน 2 ครั้ง)}
+      \msg{worker}{ส่งปัญหาที่พบให้โมเดลแก้}{gateway}
+    \end{sdblock}
+    \msg{worker}{บันทึก UIVariant}{database}
+  \end{sdblock}
+  \msg{worker}{สถานะ SUCCEEDED}{database}
+  \msg{worker}{progress ของแต่ละขั้น}{queue}
+  \reply{queue}{queue events}{back}
+  \reply{back}{generation trace ผ่าน SSE}{front}
+  \reply{front}{เปิดหน้า Refine A/B}{designer}
+\end{sequencediagram}
+\end{document}

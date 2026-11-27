@@ -1,16 +1,14 @@
 % !TeX root = ../../progress-sem1.tex
 % 3.x สถาปัตยกรรมโดยภาพรวมของระบบ
 \section{สถาปัตยกรรมโดยภาพรวมของระบบ}
+\thaijustify{
+  รูปที่~\ref{fig:tech-stack-system-architecture} แสดงสถาปัตยกรรมของระบบตามซอร์สโค้ดใน branch หลัก ณ วันที่ 25 พฤศจิกายน 2569 ระบบแบ่งเป็น Client, Frontend, Backend API, AI Job Processor, ส่วนจัดเก็บข้อมูล และบริการภายนอก Frontend พัฒนาด้วย Next.js และสื่อสารกับ Backend ผ่าน REST API และ SSE (Server-Sent Events) ซึ่งให้ server ส่งความคืบหน้าไปยังหน้าจอได้แบบ real-time โดยไม่ต้องส่ง request ใหม่ Backend พัฒนาด้วย NestJS ทำหน้าที่ยืนยันตัวตน ควบคุมสิทธิ์ และจัดการข้อมูลโปรเจกต์ การทดสอบ ข้อเสนอแนะ และรายงาน งานที่ใช้เวลานานถูกเพิ่มเข้าคิว BullMQ บน Redis แล้ว AI Job Processor ดึงงานไปเรียกโมเดลผ่าน CPE AI Gateway ส่วนการร่าง prompt ใช้การ stream ผลลัพธ์จาก Backend โดยตรง
+}
 \begin{figure}[H]
   \centering
-  \includegraphics[
-    width=0.8\linewidth,
-    height=\textheight,
-    keepaspectratio
-  ]{figures/ch3-methodology/sys-arch3.png}
+  \includegraphics[width=0.9\linewidth,height=0.62\textheight,keepaspectratio]{figures/ch3-methodology/system-architecture.pdf}
   \caption{System architecture}
   \label{fig:tech-stack-system-architecture}
-  \thaijustify{ภาพแสดงสถาปัตยกรรมระบบโดยแบ่งออกเป็น Client, Frontend, Backend, AI Job Processor, Database และ External Services โดย Frontend พัฒนาด้วย Next.js และสื่อสารกับ Backend ผ่าน REST API และ SSE (Server-Sent Events) ซึ่งช่วยให้ Server สามารถส่งข้อมูลและการอัปเดตแบบ Real-time ไปยัง Client ได้โดยไม่ต้องส่ง Request ใหม่ ขณะที่ Backend ซึ่งพัฒนาด้วย NestJS ทำหน้าที่จัดการสิทธิ์ ข้อมูลโครงการ การทดสอบ Feedback รายงาน และกระบวนการ AI โดยงานที่ต้องใช้เวลาประมวลผลจะถูกส่งผ่าน BullMQ ไปยัง AI Job Processor และเชื่อมต่อกับ CPE AI Gateway สำหรับการประมวลผลด้วย AI}
 \end{figure}
 
 \input{content/ch3/architecture-layers}

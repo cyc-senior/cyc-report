@@ -9,12 +9,18 @@
 \thaijustify{
   ช่วง Foundation เป็นการวางโครงสร้างพื้นฐานของโปรเจกต์ ได้แก่
   \begin{itemize}
-    \item \textbf{โครงสร้างซอร์สโค้ด:} monorepo ที่มี frontend และ backend ใช้คำสั่งเดียวในการรัน build, lint และ test ทั้งระบบ
-    \item \textbf{สภาพแวดล้อมสำหรับพัฒนา:} ใช้ Docker Compose รัน PostgreSQL และ Redis มีสคริปต์สร้างไฟล์ตั้งค่า สร้างผู้ใช้ทดสอบ และออก token สำหรับทดสอบ API โดยไม่ต้องเข้าสู่ระบบผ่าน Google
-    \item \textbf{Data model:} ออกแบบ schema ของฐานข้อมูลครอบคลุมทุก milestone ตั้งแต่ผู้ใช้จนถึงรายงาน (หัวข้อ~\ref{sec:er-diagram}) และจัดการการเปลี่ยนแปลงด้วย migration ซึ่งมีทั้งหมด 7 ชุด โดยกำหนดให้ migration ที่ merge แล้วแก้ไขไม่ได้ เพื่อให้ฐานข้อมูลของทุกคนตรงกัน
-    \item \textbf{Design system:} ใช้ shadcn/ui เป็นพื้นฐานของหน้าจอแพลตฟอร์ม และเตรียม UI kit สองชุด คือ shadcn/ui และ MUI ให้ AI ใช้สร้างหน้าจอตามที่นักออกแบบเลือก
-    \item \textbf{PDPA:} ออกแบบการเก็บความยินยอมของผู้เข้าร่วมทดสอบพร้อมเวอร์ชันของข้อความ เพื่อใช้ใน M4
-    \item \textbf{CI:} GitHub Actions ตรวจทุก pull request โดยเรียงเป็นสามขั้น คือ ชื่อ pull request, lint และ build
+    \item \textbf{โครงสร้างซอร์สโค้ด}\\
+      monorepo ที่มี frontend และ backend ใช้คำสั่งเดียวในการรัน build, lint และ test ทั้งระบบ
+    \item \textbf{สภาพแวดล้อมสำหรับพัฒนา}\\
+      ใช้ Docker Compose รัน PostgreSQL และ Redis มีสคริปต์สร้างไฟล์ตั้งค่า สร้างผู้ใช้ทดสอบ และออก token สำหรับทดสอบ API โดยไม่ต้องเข้าสู่ระบบผ่าน Google
+    \item \textbf{Data model}\\
+      ออกแบบ schema ของฐานข้อมูลครอบคลุมทุก milestone ตั้งแต่ผู้ใช้จนถึงรายงาน (หัวข้อ~\ref{sec:er-diagram}) และจัดการการเปลี่ยนแปลงด้วย migration ซึ่งมีทั้งหมด 7 ชุด โดยกำหนดให้ migration ที่ merge แล้วแก้ไขไม่ได้ เพื่อให้ฐานข้อมูลของทุกคนตรงกัน
+    \item \textbf{Design system}\\
+      ใช้ shadcn/ui เป็นพื้นฐานของหน้าจอแพลตฟอร์ม และเตรียม UI kit สองชุด คือ shadcn/ui และ MUI ให้ AI ใช้สร้างหน้าจอตามที่นักออกแบบเลือก
+    \item \textbf{PDPA}\\
+      ออกแบบการเก็บความยินยอมของผู้เข้าร่วมทดสอบพร้อมเวอร์ชันของข้อความ เพื่อใช้ใน M4
+    \item \textbf{CI}\\
+      GitHub Actions ตรวจทุก pull request โดยเรียงเป็นสามขั้น คือ ชื่อ pull request, lint และ build
   \end{itemize}
   ส่วนที่ยังไม่ได้ทำคือการ deploy อัตโนมัติ (CD) และระบบเก็บ event analytics
 }

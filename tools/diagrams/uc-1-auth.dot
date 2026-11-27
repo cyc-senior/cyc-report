@@ -1,0 +1,20 @@
+// Use case: Authentication (current flow on main + email/password branch).
+// Render: dot -Tpdf tools/diagrams/uc-1-auth.dot -o figures/ch3-methodology/uc-1-auth.pdf
+digraph UC1 {
+  graph [rankdir=LR, nodesep=0.25, ranksep=0.6, fontname="TH Sarabun New", fontsize=20];
+  node  [shape=ellipse, fontname="TH Sarabun New", fontsize=17, margin="0.06,0.02"];
+  edge  [fontname="TH Sarabun New", fontsize=15, arrowsize=0.6];
+  user [label="User\n(Designer, Client,\nDeveloper, PM)", shape=box, style="bold"];
+  subgraph cluster_s { label="Authentication"; style="rounded"; color="#888888";
+    google [label="Sign in with Google"];
+    reg [label="Register with\nemail and password"];
+    verify [label="Verify email"];
+    signin [label="Sign in with\nemail and password"];
+    forgot [label="Forgot password"];
+    reset [label="Reset password\nvia email link"];
+    signout [label="Sign out"];
+  }
+  user -> {google reg signin forgot signout} [arrowhead=none];
+  reg -> verify [style=dashed, label="«include»"];
+  forgot -> reset [style=dashed, label="«include»"];
+}

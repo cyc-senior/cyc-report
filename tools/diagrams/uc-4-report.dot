@@ -1,0 +1,30 @@
+// Use case: project view and role reports (hi-fi v2 screens 25, 37-39).
+// Render: dot -Tpdf tools/diagrams/uc-4-report.dot -o figures/ch3-methodology/uc-4-report.pdf
+digraph UC4 {
+  graph [rankdir=LR, nodesep=0.22, ranksep=0.7, fontname="TH Sarabun New", fontsize=20, newrank=true];
+  node  [shape=ellipse, fontname="TH Sarabun New", fontsize=17, margin="0.05,0.02"];
+  edge  [fontname="TH Sarabun New", fontsize=15, arrowsize=0.6];
+  designer [label="Designer", shape=box, style="bold"];
+  client [label="Client", shape=box, style="bold"];
+  dev [label="Developer", shape=box, style="bold"];
+  pm [label="Project Manager", shape=box, style="bold"];
+  subgraph cluster_r { label="Project view and reports"; style="rounded"; color="#888888";
+    gen [label="Generate, edit and publish\nrole reports from\napproved round"];
+    list [label="View project list\n(read-only, approved rounds)"];
+    crep [label="View client report:\nwhat changed and why"];
+    hand [label="View handoff: spec,\ncomponents, code,\ntechnical risks"];
+    prog [label="View round progress\nand timeline gap"];
+    ack [label="Acknowledge\nand comment"];
+    export [label="Export PDF or\nshare link"];
+  }
+  designer -> gen [arrowhead=none];
+  client -> {list crep} [arrowhead=none];
+  dev -> {list hand} [arrowhead=none];
+  pm -> {list prog} [arrowhead=none];
+  crep -> ack [style=dashed, label="«extend»", dir=back];
+  {crep hand prog} -> export [style=dashed, label="«extend»", dir=back];
+  {rank=same; designer; client; dev; pm}
+  {rank=same; gen; list; crep; hand; prog}
+  {rank=same; ack; export}
+  designer -> client -> dev -> pm [style=invis];
+}

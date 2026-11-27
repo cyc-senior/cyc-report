@@ -1,0 +1,27 @@
+% Sequence: Google sign-in and token refresh
+% Source of truth: cyc-monorepo apps/backend/src/modules/auth, apps/frontend/src/lib/api-client.ts
+% Build: cd tools/diagrams && xelatex seq-auth.tex && mv seq-auth.pdf ../../figures/ch3-methodology/
+\documentclass[border=4pt]{standalone}
+\input{seq-common}
+\begin{document}
+\begin{sequencediagram}
+  \newthread{usr}{ผู้ใช้}
+  \newinst[2.2]{front}{Frontend (Next.js)}
+  \newinst[2.6]{back}{Backend (NestJS)}
+  \newinst[2.2]{google}{Google OAuth}
+  \newinst[2.6]{database}{PostgreSQL}
+  \msg{usr}{กด Sign in with Google}{front}
+  \msg{front}{GET /auth/google}{back}
+  \reply{back}{redirect ไปหน้ายินยอมของ Google}{usr}
+  \msg{usr}{เลือกบัญชีและยินยอม}{google}
+  \reply{google}{GET /auth/google/callback (code)}{back}
+  \msg{back}{แลก code เป็นข้อมูลโปรไฟล์}{google}
+  \msg{back}{สร้างหรืออัปเดต User และ Account}{database}
+  \msg{back}{บันทึก hash ของ refresh token}{database}
+  \reply{back}{cookie refreshToken (httpOnly), redirect /dashboard}{front}
+  \msg{front}{POST /auth/refresh (cookie)}{back}
+  \msg{back}{ตรวจ hash, ยกเลิก token เดิม, บันทึก token ใหม่}{database}
+  \reply{back}{access token (JWT 15 นาที) และ cookie ใหม่}{front}
+  \msg{front}{เรียก API ด้วย Authorization: Bearer}{back}
+\end{sequencediagram}
+\end{document}

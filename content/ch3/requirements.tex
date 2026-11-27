@@ -1,11 +1,78 @@
 % !TeX root = ../../progress-sem1.tex
-% 3.x ความต้องการของระบบ
-\section{ความต้องการของระบบ}
+% 3.x ความต้องการของระบบ (functional / non-functional requirements)
+\section{ความต้องการของระบบ}\label{sec:requirements}
+\thaijustify{
+  ความต้องการของระบบกำหนดจากวัตถุประสงค์และขอบเขตของโครงงานในบทที่ 1 แผนภาพกรณีการใช้งาน และหน้าจอ high-fidelity ที่ออกแบบไว้ แบ่งเป็นความต้องการเชิงฟังก์ชันและความต้องการที่ไม่ใช่เชิงฟังก์ชัน
+}
 \subsection{Functional Requirements}
 \thaijustify{
-  \todo{Functional requirements แยกตามส่วนของระบบ}
+  ความต้องการเชิงฟังก์ชันแบ่งตามส่วนของระบบ แสดงในตารางที่~\ref{tab:functional-requirements} โดยเครื่องหมาย \checkmark{} ระบุบทบาทที่ใช้งานความต้องการนั้น
 }
+\begingroup
+\small
+\newcommand{\rot}[1]{\rotatebox{90}{\textbf{#1}\,}}
+\begin{xltabular}{\linewidth}{|>{\RaggedRight\arraybackslash}p{0.1\linewidth}|>{\RaggedRight\arraybackslash}X|*{5}{>{\centering\arraybackslash}m{0.045\linewidth}|}}
+  \caption{Functional requirements และบทบาทที่ใช้งาน}\label{tab:functional-requirements}\\
+  \hline
+  \textbf{รหัส} & \textbf{ความต้องการ} & \rot{Designer} & \rot{Tester} & \rot{Client} & \rot{Developer} & \rot{PM} \\ \hline
+  \endfirsthead
+  \multicolumn{7}{l}{\textit{ตารางที่ \thetable\ (ต่อ)}}\\
+  \hline
+  \textbf{รหัส} & \textbf{ความต้องการ} & \rot{Designer} & \rot{Tester} & \rot{Client} & \rot{Developer} & \rot{PM} \\ \hline
+  \endhead
+  \multicolumn{7}{|l|}{\textbf{การยืนยันตัวตนและสิทธิ์}} \\ \hline
+  FR-01 & ผู้ใช้สมัครสมาชิกและเข้าสู่ระบบด้วยบัญชี Google หรืออีเมลและรหัสผ่านได้ โดยบัญชีที่สมัครด้วยอีเมลต้องยืนยันอีเมลก่อนใช้งาน & \checkmark &  & \checkmark & \checkmark & \checkmark \\ \hline
+  FR-02 & ผู้ใช้รีเซ็ตรหัสผ่านผ่านลิงก์ที่ส่งทางอีเมลได้ & \checkmark &  & \checkmark & \checkmark & \checkmark \\ \hline
+  FR-03 & ระบบจำกัดการเข้าถึงข้อมูลและการกระทำตามบทบาทของผู้ใช้ในแต่ละโปรเจกต์ & \checkmark &  & \checkmark & \checkmark & \checkmark \\ \hline
+  \multicolumn{7}{|l|}{\textbf{การตั้งค่าโปรเจกต์}} \\ \hline
+  FR-04 & ผู้ใช้สร้าง workspace เชิญสมาชิกด้วยอีเมลหรือลิงก์ และสลับระหว่าง workspace ได้ & \checkmark &  &  &  &  \\ \hline
+  FR-05 & Designer สร้าง แก้ไข และค้นหาโปรเจกต์ พร้อมกำหนดสมาชิกและบทบาทในโปรเจกต์ได้ & \checkmark &  &  &  &  \\ \hline
+  FR-06 & Designer กำหนด design intent ได้แก่ persona, design system, มาตรฐานการเข้าถึง, สีแบรนด์, แนวทาง CI และ tone of voice & \checkmark &  &  &  &  \\ \hline
+  \multicolumn{7}{|l|}{\textbf{การสร้าง UI ด้วย AI}} \\ \hline
+  FR-07 & Designer เขียน user story, problem statement, ตัวชี้วัดความสำเร็จ และเลือกอุปกรณ์ที่ต้องการทดสอบได้ & \checkmark &  &  &  &  \\ \hline
+  FR-08 & ระบบใช้ AI ร่าง structured prompt จาก design intent, persona และ user story ให้ Designer ตรวจและแก้ไขก่อนสร้าง UI & \checkmark &  &  &  &  \\ \hline
+  FR-09 & ระบบสร้าง two-alternative UI ตาม prompt ที่อนุมัติ โดยใช้ component ของ design system ที่เลือก และแสดงความคืบหน้าแบบ real-time & \checkmark &  &  &  &  \\ \hline
+  FR-10 & Designer ปรับแก้ UI ผ่านแชตหรือเลือก element บนหน้าจอ ดูหน้าจอในขนาดอุปกรณ์ต่าง ๆ และย้อนดูเวอร์ชันก่อนหน้าได้ & \checkmark &  &  &  &  \\ \hline
+  \multicolumn{7}{|l|}{\textbf{การทดสอบ}} \\ \hline
+  FR-11 & Designer กำหนดภารกิจ คำถามเปรียบเทียบ คำถามเฉพาะจุด จำนวนผู้เข้าร่วมทดสอบ และเงื่อนไขการหยุดทดสอบได้ & \checkmark &  &  &  &  \\ \hline
+  FR-12 & ระบบสร้างรหัสหรือลิงก์สำหรับเข้าเซสชันการทดสอบ ผู้เข้าร่วมทดสอบเข้าได้โดยไม่ต้องมีบัญชี & \checkmark & \checkmark &  &  &  \\ \hline
+  FR-13 & ผู้เข้าร่วมทดสอบต้องให้ความยินยอมตาม PDPA ก่อนเริ่มทดสอบ &  & \checkmark &  &  &  \\ \hline
+  FR-14 & ผู้เข้าร่วมทดสอบทำภารกิจบนทั้งสองดีไซน์ ตอบคำถามผ่านแชต และให้ความเห็นต่อ component หรือทั้งหน้าจอได้ &  & \checkmark &  &  &  \\ \hline
+  \multicolumn{7}{|l|}{\textbf{การวิเคราะห์ข้อเสนอแนะ}} \\ \hline
+  FR-15 & Designer ติดตามความคืบหน้าและแนวโน้มความคิดเห็นของผู้เข้าร่วมทดสอบแต่ละคน และเข้าไปกำหนดทิศทางเมื่อแนวโน้มผิดปกติได้ & \checkmark &  &  &  &  \\ \hline
+  FR-16 & ระบบใช้ AI จัดกลุ่มข้อเสนอแนะเป็นประเด็น ให้ Designer ปรับป้ายกำกับ รวม แยก หรือระบุว่าไม่แก้ไขพร้อมเหตุผล & \checkmark &  &  &  &  \\ \hline
+  FR-17 & Designer เลือกประเด็นที่ต้องการแก้ไข แล้วระบบสร้าง UI สำหรับรอบถัดไป โดยบันทึกความเชื่อมโยงระหว่างข้อเสนอแนะกับการเปลี่ยนแปลง & \checkmark &  &  &  &  \\ \hline
+  FR-18 & ระบบสร้าง Persona Artifact จากประเด็นที่ Designer ยืนยันแล้ว & \checkmark &  &  &  &  \\ \hline
+  \multicolumn{7}{|l|}{\textbf{รายงาน}} \\ \hline
+  FR-19 & ระบบสร้างรายงานแยกตามบทบาทจากรอบที่อนุมัติแล้ว ให้ Designer แก้ไขก่อนเผยแพร่ & \checkmark &  &  &  &  \\ \hline
+  FR-20 & Client, Developer และ Project Manager ดูรายงานของบทบาทตนเอง รับทราบและแสดงความเห็นได้ &  &  & \checkmark & \checkmark & \checkmark \\ \hline
+  FR-21 & ผู้ใช้ส่งออกรายงานเป็น PDF หรือแชร์เป็นลิงก์ได้ & \checkmark &  & \checkmark & \checkmark & \checkmark \\ \hline
+\end{xltabular}
+\endgroup
+
 \subsection{Non-Functional Requirements}
 \thaijustify{
-  \todo{Non-functional requirements เช่น ความปลอดภัย, PDPA, ประสิทธิภาพ, การใช้งาน}
+  ความต้องการที่ไม่ใช่เชิงฟังก์ชันแสดงในตารางที่~\ref{tab:non-functional-requirements}
 }
+\begingroup
+\small
+\begin{xltabular}{\linewidth}{|>{\RaggedRight\arraybackslash}p{0.11\linewidth}|>{\RaggedRight\arraybackslash}p{0.2\linewidth}|>{\RaggedRight\arraybackslash}X|}
+  \caption{Non-functional requirements}\label{tab:non-functional-requirements}\\
+  \hline
+  \textbf{รหัส} & \textbf{ด้าน} & \textbf{ความต้องการ} \\ \hline
+  \endfirsthead
+  \multicolumn{3}{l}{\textit{ตารางที่ \thetable\ (ต่อ)}}\\
+  \hline
+  \textbf{รหัส} & \textbf{ด้าน} & \textbf{ความต้องการ} \\ \hline
+  \endhead
+  NFR-01 & ความปลอดภัย & ใช้ access token แบบ JWT ที่มีอายุสั้น และ refresh token ที่เก็บเป็นค่า hash และเปลี่ยนใหม่ทุกครั้งที่ใช้ ตรวจสิทธิ์ทุก API ตาม permission ของบทบาท และบันทึกการกระทำสำคัญลง audit log \\ \hline
+  NFR-02 & ความเป็นส่วนตัว (PDPA) & เก็บความยินยอมของผู้เข้าร่วมทดสอบพร้อมเวอร์ชันของข้อความ ลบอีเมล หมายเลขโทรศัพท์ และลิงก์ออกจากข้อความก่อนส่งให้ AI และไม่แสดงอีเมลของผู้เข้าร่วมทดสอบในหน้าข้อเสนอแนะ \\ \hline
+  NFR-03 & การตอบสนอง & งานที่ใช้เวลานาน เช่น การสร้าง UI ทำงานเบื้องหลังผ่านคิว ไม่ทำให้หน้าจอค้าง และแสดงความคืบหน้าแบบ real-time ผ่าน SSE โดยผู้ใช้ยกเลิกงานได้ \\ \hline
+  NFR-04 & ความน่าเชื่อถือของผลลัพธ์ AI & ผลลัพธ์ของ AI ต้องอยู่ในรูปแบบที่กำหนด (JSON ตาม schema หรือ HTML) และ UI ที่สร้างต้องผ่านการตรวจ design system, สีแบรนด์ และการเข้าถึงก่อนแสดงให้ Designer \\ \hline
+  NFR-05 & การเข้าถึง (Accessibility) & UI ที่ AI สร้างต้องเป็นไปตามมาตรฐานการเข้าถึงที่กำหนดใน design intent ซึ่งค่าเริ่มต้นคือ WCAG 2.1 ระดับ AA \\ \hline
+  NFR-06 & การใช้งาน (Usability) & หน้าจอของแพลตฟอร์มใช้ design system เดียวกันทั้งระบบ และผู้เข้าร่วมทดสอบใช้งานได้โดยไม่ต้องสมัครสมาชิกหรือติดตั้งโปรแกรม \\ \hline
+  NFR-07 & ความเข้ากันได้ & ใช้งานผ่านเว็บเบราว์เซอร์รุ่นปัจจุบัน และ UI ที่สร้างรองรับการแสดงผลบน desktop, tablet และ mobile \\ \hline
+  NFR-08 & การบำรุงรักษา & เปลี่ยนโมเดล AI ได้ผ่านการตั้งค่าโดยไม่ต้องแก้โค้ด ทุก pull request ผ่าน lint และ build อัตโนมัติ และการเปลี่ยน schema ของฐานข้อมูลทำผ่าน migration \\ \hline
+  NFR-09 & การตรวจสอบย้อนกลับ & ทุกการตัดสินใจของ Designer และทุกการเปลี่ยนแปลงระหว่างรอบต้องสืบย้อนกลับไปยังข้อเสนอแนะต้นทางได้ \\ \hline
+\end{xltabular}
+\endgroup

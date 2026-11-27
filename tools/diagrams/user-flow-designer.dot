@@ -1,0 +1,41 @@
+// Designer user flow, redrawn from the Figma board "User flow (Hi-fi v2)"
+// (Hi-Fidelity Wireframe file, Happy flow page) so it stays readable in print.
+// Numbers are hi-fi screen numbers. Render:
+//   dot -Tpdf tools/diagrams/user-flow-designer.dot -o figures/ch3-methodology/user-flow-designer.pdf
+digraph UF {
+  graph [rankdir=TB, nodesep=0.3, ranksep=0.25, fontname="TH Sarabun New", fontsize=20, newrank=true];
+  node  [shape=box, style="rounded", fontname="TH Sarabun New", fontsize=17, margin="0.1,0.04", height=0.34, width=1.6];
+  edge  [fontname="TH Sarabun New", fontsize=15, color="#555555", arrowsize=0.6];
+
+  subgraph cluster_a { label="เริ่มต้นใช้งาน"; style="rounded,dashed"; color="#999999";
+    n1 [label="1 Landing"]; d1 [label="สมัครด้วยวิธีไหน?", shape=diamond, style="", width=1.8, margin="0.02,0.02"];
+    n3 [label="3 Register"]; n4 [label="4 Verify email"]; n6 [label="6 First run"]; n8 [label="8 Create workspace"]; n10 [label="10 Projects"];
+    n1 -> d1; d1 -> n3 [label=" อีเมล"]; n3 -> n4 -> n6; n6 -> n8 -> n10;
+    d1 -> n6 [label=" Google"];
+    n2 [label="2 Sign in (ผู้ใช้เดิม)"];
+  }
+  n2 -> n10 [constraint=false];
+  subgraph cluster_b { label="ตั้งค่าโปรเจกต์"; style="rounded,dashed"; color="#999999";
+    n11 [label="11 Create project"]; n12 [label="12 Design intent"]; n13 [label="13 Team & roles"]; n14 [label="14 Overview"];
+    n11 -> n12 -> n13 -> n14;
+  }
+  subgraph cluster_c { label="Design cycle ของ user story"; style="rounded,dashed"; color="#999999";
+    n15 [label="15 User story"]; n16 [label="16 Review prompt"]; n17 [label="17 Generating A/B"]; n18 [label="18 Refine A/B"];
+    d2 [label="พร้อมทดสอบ?", shape=diamond, style="", width=1.6, margin="0.02,0.02"]; n19 [label="19 Test setup"]; n20 [label="20 Open session & share"];
+    n15 -> n16 -> n17 -> n18 -> d2; d2 -> n19 [label=" พร้อม"]; n19 -> n20;
+    d2 -> n18 [label="ยัง", constraint=false];
+  }
+  subgraph cluster_d { label="ทดสอบและรายงาน"; style="rounded,dashed"; color="#999999";
+    n21 [label="21 Monitor testers"]; d3 [label="แนวโน้มขึ้นลง?", shape=diamond, style="", width=1.6, margin="0.02,0.02"];
+    n22 [label="22 Step in"]; n21a [label="21A All testers done"]; n23 [label="23 Review themes"]; n24 [label="24 Compare final UIs"];
+    d4 [label="Approve?", shape=diamond, style="", width=1.3, margin="0.02,0.02"]; n25 [label="25 Role reports"];
+    n21 -> d3; d3 -> n21a [label=" ทุกคนเสร็จ"]; n21a -> n23 -> n24 -> d4; d4 -> n25 [label=" อนุมัติ"];
+    d3 -> n22 [label="ใช่"]; n22 -> n21 [constraint=false];
+    {rank=same; d3; n22}
+  }
+  n10 -> n11 [label="New project", constraint=false];
+  n14 -> n15 [label="New user story", constraint=false];
+  n20 -> n21 [constraint=false];
+  d4 -> n19 [label="ทดสอบอีกรอบ", constraint=false, style=dashed];
+  {rank=same; n1; n11; n15; n21}
+}

@@ -1,0 +1,34 @@
+// System architecture of cyc-monorepo main (commit 5ce62d1, 25 Nov 2026).
+// Render: dot -Tpdf tools/diagrams/system-architecture.dot -o figures/ch3-methodology/system-architecture.pdf
+digraph ARCH {
+  graph [rankdir=TB, nodesep=0.35, ranksep=0.5, fontname="TH Sarabun New", fontsize=20, newrank=true];
+  node  [shape=box, style="rounded", fontname="TH Sarabun New", fontsize=17, margin="0.12,0.05"];
+  edge  [fontname="TH Sarabun New", fontsize=15, arrowsize=0.6, color="#444444"];
+
+  subgraph cluster_client { label="Client (เว็บเบราว์เซอร์)"; style="rounded,dashed"; color="#888888";
+    designer [label="Designer\nworkspace, โปรเจกต์,\nสร้างและปรับแก้ UI"];
+    tester [label="Usability Tester\nเข้าเซสชันด้วย\nรหัสหรือลิงก์"];
+    stake [label="Client, Developer, PM\nมุมมองและรายงาน"];
+  }
+  fe [label=<<b>Frontend</b> (Next.js 16, React 19)<br/>App Router: (auth), (dashboard), (legal)<br/>shadcn/ui, Tailwind CSS<br/>แสดงตัวอย่าง UI ใน iframe แบบ sandbox>];
+  be [label=<<b>Backend API</b> (NestJS 11)<br/>JWT guard, permission guard, rate limit, security header<br/>module: auth, access, users, workspaces, projects, design, rounds,<br/>generation, ai, testing, iteration, stakeholders, audit, health<br/>ร่าง prompt แบบ stream และส่งต่อความคืบหน้าของงานผ่าน SSE>];
+  google [label="Google OAuth 2.0", style="rounded,dashed"];
+  redis [label="Redis 7\nคิว BullMQ, queue event,\ncache ของ response", shape=cylinder, style=""];
+  pg [label="PostgreSQL 17\n(Prisma 7, 34 ตาราง)", shape=cylinder, style=""];
+  subgraph cluster_worker { label="AI Job Processor (BullMQ worker)"; style="rounded"; color="#888888";
+    gen [label="คิว design-generation\nสร้าง UI variant, ตรวจและแก้,\nสังเคราะห์ persona"];
+    task [label="คิว ai-task\nร่าง user story,\nวิเคราะห์ข้อเสนอแนะ"];
+  }
+  gateway [label="CPE AI Gateway (เข้าถึงผ่าน VPN)\nmuse-glimmer-30b, qwen3.8-27b", style="rounded,dashed"];
+
+  {designer tester stake} -> fe;
+  fe -> be [label=" REST API / SSE", dir=both];
+  be -> google [style=dashed, label=" OAuth"];
+  be -> redis [label=" เพิ่มงาน"];
+  be -> pg;
+  redis -> {gen task} [label=" ดึงงาน / ส่งความคืบหน้า", dir=both];
+  {gen task} -> pg [constraint=false];
+  {gen task} -> gateway;
+  be -> gateway [style=dashed, label=" ร่าง prompt", constraint=false];
+  {rank=same; google; redis; pg}
+}

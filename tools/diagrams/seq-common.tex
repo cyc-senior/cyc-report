@@ -1,0 +1,27 @@
+% Shared preamble for the sequence diagrams (pgf-umlsd), built as standalone PDFs.
+\usepackage{fontspec}
+\setmainfont{THSarabunNew.ttf}[Path=../../fonts/, BoldFont=THSarabunNew-Bold.ttf, Scale=1.23]
+\XeTeXlinebreaklocale "th"
+\usepackage{tikz}
+\usepackage[underline=false,roundedcorners=true]{pgf-umlsd}
+\tikzset{every node/.append style={font=\fontsize{9}{11}\selectfont}}
+\makeatletter
+% \mess of pgf-umlsd names nodes after the label, which breaks on "(", ":" and Thai text.
+% \msg{from}{label}{to} draws a call, \reply{from}{label}{to} a dashed return,
+% \selfmsg{inst}{label} a call to itself.
+\newcommand{\msg}[3]{%
+  \stepcounter{seqlevel}%
+  \path (#1)+(0,-\theseqlevel*\unitfactor-0.7*\unitfactor) node (mess from) {};%
+  \path (#3)+(0,-\theseqlevel*\unitfactor-0.7*\unitfactor) node (mess to) {};%
+  \draw[->,>=angle 60] (mess from) -- (mess to) node[midway, above] {#2};}
+\newcommand{\reply}[3]{%
+  \stepcounter{seqlevel}%
+  \path (#1)+(0,-\theseqlevel*\unitfactor-0.7*\unitfactor) node (mess from) {};%
+  \path (#3)+(0,-\theseqlevel*\unitfactor-0.7*\unitfactor) node (mess to) {};%
+  \draw[->,>=angle 60,dashed] (mess from) -- (mess to) node[midway, above] {#2};}
+\newcommand{\selfmsg}[2]{%
+  \stepcounter{seqlevel}%
+  \path (#1)+(0,-\theseqlevel*\unitfactor-0.5*\unitfactor) node (mess from) {};%
+  \draw[->,>=angle 60] (mess from) -- ++(0.5,0) -- ++(0,-0.35) node[right, midway] {#2} -- ++(-0.5,0);%
+  \stepcounter{seqlevel}}
+\makeatother

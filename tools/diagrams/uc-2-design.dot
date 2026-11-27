@@ -1,0 +1,27 @@
+// Use case: Designer project setup and UI generation (hi-fi v2 screens 8-18).
+digraph UC2 {
+  graph [rankdir=LR, nodesep=0.2, ranksep=0.55, fontname="TH Sarabun New", fontsize=20, newrank=true];
+  node  [shape=ellipse, fontname="TH Sarabun New", fontsize=17, margin="0.05,0.02"];
+  edge  [fontname="TH Sarabun New", fontsize=15, arrowsize=0.6];
+  designer [label="Designer", shape=box, style="bold"];
+  subgraph cluster_setup { label="Project setup"; style="rounded"; color="#888888";
+    ws [label="Create or switch\nworkspace"];
+    invite [label="Invite members"];
+    proj [label="Create project"];
+    team [label="Assign team\nand roles"];
+    intent [label="Set up design intent\n(persona, design system,\naccessibility, brand, CI,\ntone of voice)"];
+  }
+  subgraph cluster_gen { label="UI generation"; style="rounded"; color="#888888";
+    story [label="Write user story,\nproblem statement\nand target devices"];
+    prompt [label="Review structured\nprompt drafted by AI"];
+    gen [label="Generate\ntwo-alternative UI (AI)"];
+    trace [label="Follow generation\ntrace / cancel"];
+    refine [label="Refine UI by chat or\nselected element (AI)"];
+    history [label="View version\nhistory"];
+  }
+  designer -> {ws proj intent story prompt refine history} [arrowhead=none];
+  ws -> invite [style=dashed, label="«extend»", dir=back];
+  proj -> team [style=dashed, label="«include»"];
+  prompt -> gen [style=dashed, label="«include»"];
+  gen -> trace [style=dashed, label="«extend»", dir=back];
+}

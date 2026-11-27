@@ -1,87 +1,89 @@
 % !TeX root = ../../progress-sem1.tex
 % 3.x การออกแบบระบบ (System Design)
 \section{การออกแบบระบบ (System Design)}
-\begin{samepage}
-  \subsection{Use Case Diagram}
-  \thaijustify{
-    แผนภาพกรณีการใช้งาน (Use case diagram) แสดงความสัมพันธ์ระหว่างผู้ใช้งานแต่ละบทบาทกับฟังก์ชันของแพลตฟอร์ม โดยแบ่งออกเป็น 4 ส่วน ได้แก่ ส่วน Authentication, ส่วนสร้าง two-alternative UI, ส่วนทดสอบการใช้งานและรับความเห็น, และส่วนสร้างรายงาน
-  }
-  \subsubsection{Authentication}
-  \begin{figure}[H]
-    \centering
-    \includegraphics[
-      width=0.6\textheight,
-      height=\linewidth,
-      keepaspectratio,
-      origin=c
-    ]{figures/ch3-methodology/UC-1.png}
-    \caption{Use case diagram for authentication}
-    \label{fig:UC-1}
-    \thaijustify{ภาพแสดง Use Case ของระบบ Authentication โดยผู้ใช้สามารถสมัครสมาชิก เข้าสู่ระบบ และกู้คืนรหัสผ่านได้ โดยการยืนยันอีเมลเป็นขั้นตอนเสริมหลังการสมัคร และการรีเซ็ตรหัสผ่านดำเนินการผ่านลิงก์ที่ส่งทางอีเมล}
-  \end{figure}
-  \subsubsection{Designer: Project setup \& UI Generation}
-  \begin{figure}[H]
-    \centering
-    \includegraphics[
-      width=0.6\textheight,
-      height=\linewidth,
-      keepaspectratio,
-      origin=c
-    ]{figures/ch3-methodology/UC-2.png}
-    \caption{Use case diagram for Project setup and UI Generation}
-    \label{fig:UC-2}
-    \thaijustify{ภาพแสดง Use Case ของกระบวนการจัดเตรียมโครงการและสร้าง UI โดย Designer สามารถสร้างโครงการ กำหนด Design Intent สร้างและปรับแต่ง Prompt เพื่อสร้าง UI หลายรูปแบบ รวมถึงปรับแก้ UI และอนุมัติเพื่อส่งให้ผู้ทดสอบประเมิน}
-  \end{figure}
-  \subsubsection{Designer and Tester: Testing session and Feedback analysis}
-  \begin{figure}[H]
-    \centering
-    \includegraphics[
-      width=0.6\textheight,
-      height=\linewidth,
-      keepaspectratio,
-      origin=c
-    ]{figures/ch3-methodology/UC-3.png}
-    \caption{Use case diagram for Testing session and Feedback analysis}
-    \label{fig:UC-3}
-    \thaijustify{ภาพแสดง Use Case ของกระบวนการทดสอบและวิเคราะห์ Feedback โดย Tester เข้าร่วมการทดสอบ ทำภารกิจ และให้ความคิดเห็น ขณะที่ Designer รวบรวมและตรวจสอบผลการทดสอบ วิเคราะห์ Feedback ด้วย AI และเลือกประเด็นเพื่อนำไปปรับปรุงส่วนต่อประสานผู้ใช้}
-  \end{figure}
-  \subsubsection{Client, Developer, and Project Manager: Project view and Report}
-  \begin{figure}[H]
-    \centering
-    \includegraphics[
-      width=0.6\textheight,
-      height=\linewidth,
-      keepaspectratio,
-      origin=c
-    ]{figures/ch3-methodology/UC-4.png}
-    \caption{Use case diagram for Project view and Report}
-    \label{fig:UC-4}
-    \thaijustify{
-      ภาพแสดง Use Case ของการดูโครงการและรายงาน โดย ผู้ใช้งาน, นักพัฒนา และ ผู้ดูแลโครงการ สามารถดูข้อมูลโครงการที่ได้รับอนุมัติและข้อมูลที่เกี่ยวข้องตามบทบาท รวมถึงดูรายงานที่สร้างจากผลการทดสอบและ Feedback
-    }
-  \end{figure}
-\end{samepage}
-
-\subsection{Sequence Diagram}
+\subsection{Use Case Diagram}
 \thaijustify{
-  \todo{Sequence diagram ของกระบวนการหลัก เช่น การสร้าง two-alternative UI และการทดสอบ}
+  แผนภาพกรณีการใช้งาน (Use case diagram) แสดงความสัมพันธ์ระหว่างผู้ใช้งานแต่ละบทบาทกับฟังก์ชันของแพลตฟอร์มตาม user flow ของหน้าจอ high-fidelity ล่าสุด (หัวข้อ~\ref{sec:user-flow}) โดยแบ่งออกเป็น 4 ส่วน ได้แก่ การยืนยันตัวตน การตั้งค่าโปรเจกต์และการสร้าง UI การทดสอบและการวิเคราะห์ข้อเสนอแนะ และการดูโปรเจกต์และรายงาน
 }
+\subsubsection{Authentication}
+\thaijustify{
+  รูปที่~\ref{fig:UC-1} แสดงกรณีการใช้งานของการยืนยันตัวตน ผู้ใช้ที่มีบัญชี ได้แก่ Designer, Client, Developer และ Project Manager เข้าสู่ระบบด้วยบัญชี Google หรือสมัครสมาชิกด้วยอีเมลและรหัสผ่านซึ่งต้องยืนยันอีเมล และรีเซ็ตรหัสผ่านผ่านลิงก์ที่ส่งทางอีเมลได้ ส่วนผู้เข้าร่วมทดสอบไม่ต้องมีบัญชี
+}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth,height=0.42\textheight,keepaspectratio]{figures/ch3-methodology/uc-1-auth.pdf}
+  \caption{Use case diagram ของการยืนยันตัวตน}
+  \label{fig:UC-1}
+\end{figure}
+\subsubsection{Designer: Project setup \& UI Generation}
+\thaijustify{
+  รูปที่~\ref{fig:UC-2} แสดงกรณีการใช้งานของ Designer ในการตั้งค่าโปรเจกต์และสร้าง UI ได้แก่ การสร้างหรือสลับ workspace และเชิญสมาชิก การสร้างโปรเจกต์พร้อมกำหนดทีมและบทบาท การกำหนด design intent การเขียน user story พร้อมเลือกอุปกรณ์ที่ต้องการทดสอบ การตรวจ structured prompt ที่ AI ร่าง การสร้าง two-alternative UI ซึ่งติดตามขั้นตอนของ AI หรือยกเลิกได้ การปรับแก้ UI ผ่านแชตหรือเลือก element และการย้อนดูเวอร์ชันก่อนหน้า
+}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth,height=0.42\textheight,keepaspectratio]{figures/ch3-methodology/uc-2-design.pdf}
+  \caption{Use case diagram ของการตั้งค่าโปรเจกต์และการสร้าง UI}
+  \label{fig:UC-2}
+\end{figure}
+\subsubsection{Designer and Tester: Testing session and Feedback analysis}
+\thaijustify{
+  รูปที่~\ref{fig:UC-3} แสดงกรณีการใช้งานของการทดสอบและการวิเคราะห์ข้อเสนอแนะ ผู้เข้าร่วมทดสอบเข้าเซสชันด้วยรหัสหรือลิงก์โดยกรอกชื่อและอีเมล ให้ความยินยอมตาม PDPA ทำภารกิจบน Design 1 และ 2 ตอบคำถามผ่านแชต ปักหมุดความคิดเห็น และทดสอบ A/B ของรอบถัดไปที่ AI สร้างจากข้อเสนอแนะของตนเอง ส่วน Designer กำหนดการทดสอบและเปิดเซสชัน ติดตามแนวโน้มความคิดเห็นและเข้าไปกำหนดทิศทางเมื่อแนวโน้มผิดปกติ ตรวจประเด็นที่ AI จัดกลุ่ม เปรียบเทียบ UI สุดท้ายเพื่ออนุมัติ และสร้าง Persona Artifact
+}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth,height=0.42\textheight,keepaspectratio]{figures/ch3-methodology/uc-3-test.pdf}
+  \caption{Use case diagram ของการทดสอบและการวิเคราะห์ข้อเสนอแนะ}
+  \label{fig:UC-3}
+\end{figure}
+\subsubsection{Client, Developer, and Project Manager: Project view and Report}
+\thaijustify{
+  รูปที่~\ref{fig:UC-4} แสดงกรณีการใช้งานของการดูโปรเจกต์และรายงาน Designer สร้าง แก้ไข และเผยแพร่รายงานตามบทบาทจากรอบที่อนุมัติแล้ว Client, Developer และ Project Manager ดูรายการโปรเจกต์แบบอ่านอย่างเดียวและดูรายงานของบทบาทตนเอง ได้แก่ รายงานผลสำหรับ Client ซึ่งรับทราบและแสดงความเห็นได้ เอกสารส่งมอบงานสำหรับ Developer และความคืบหน้าของรอบการทดสอบสำหรับ Project Manager โดยส่งออกรายงานเป็น PDF หรือแชร์เป็นลิงก์ได้
+}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\linewidth,height=0.42\textheight,keepaspectratio]{figures/ch3-methodology/uc-4-report.pdf}
+  \caption{Use case diagram ของการดูโปรเจกต์และรายงาน}
+  \label{fig:UC-4}
+\end{figure}
+
+\subsection{Sequence Diagram}\label{sec:sequence-diagram}
+\thaijustify{
+  Sequence diagram แสดงลำดับการทำงานระหว่างผู้ใช้กับส่วนต่าง ๆ ของระบบในกระบวนการหลักสองกระบวนการที่พัฒนาในภาคการศึกษาที่ 1 ได้แก่ การเข้าสู่ระบบ และการร่าง prompt จนถึงการสร้าง UI variant
+}
+\thaijustify{
+  รูปที่~\ref{fig:seq-auth} แสดงการเข้าสู่ระบบด้วยบัญชี Google โดย backend ส่งผู้ใช้ไปยืนยันตัวตนกับ Google เมื่อได้ข้อมูลโปรไฟล์แล้ว ระบบสร้างหรืออัปเดตบัญชีผู้ใช้ เก็บค่า hash ของ refresh token ลงฐานข้อมูล และส่ง refresh token กลับไปใน cookie แบบ httpOnly จากนั้น frontend ใช้ cookie นี้ขอ access token ที่มีอายุ 15 นาทีเพื่อเรียก API ทุกครั้งที่ขอ token ใหม่ ระบบจะยกเลิก refresh token เดิมและออก token ใหม่แทน
+}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{figures/ch3-methodology/seq-auth.pdf}
+  \caption{Sequence diagram ของการเข้าสู่ระบบด้วยบัญชี Google}
+  \label{fig:seq-auth}
+\end{figure}
+\thaijustify{
+  รูปที่~\ref{fig:seq-generation} แสดงการร่าง prompt และการสร้าง UI variant เมื่อนักออกแบบเปิดหน้าตรวจ prompt backend อ่าน user story, design intent และ persona แล้วให้โมเดลร่าง structured prompt โดยส่งผลลัพธ์กลับมาแบบ real-time ผ่าน SSE เมื่อนักออกแบบอนุมัติ backend สร้างรอบการออกแบบและงานสร้าง UI แล้วส่งงานเข้าคิว BullMQ ทันที โดยไม่รอให้งานเสร็จ AI Job Processor รับงานจากคิวไปสร้าง UI ทีละ variant พร้อมตรวจและให้โมเดลแก้ไข ส่วนความคืบหน้าของแต่ละขั้นส่งผ่าน Redis กลับมาที่ backend และต่อไปยังหน้าจอผ่าน SSE
+}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{figures/ch3-methodology/seq-generation.pdf}
+  \caption{Sequence diagram ของการร่าง structured prompt และการสร้าง UI variant}
+  \label{fig:seq-generation}
+\end{figure}
 
 \subsection{ER Diagram}\label{sec:er-diagram}
 \thaijustify{
   ฐานข้อมูลของแพลตฟอร์มใช้ PostgreSQL และกำหนดโครงสร้างผ่าน Prisma schema ประกอบด้วย 34 ตารางและ 25 ชนิดข้อมูลแบบ enum เพื่อให้อ่านง่าย จึงแบ่ง ER diagram ออกเป็นสี่กลุ่มตามส่วนของระบบ (รูปที่~\ref{fig:er-workspace-project} ถึง~\ref{fig:er-analysis-report}) ในแต่ละตารางแสดง primary key (PK), foreign key (FK) และคอลัมน์หลักบางส่วน ส่วนตารางสีเทาเป็นตารางจากกลุ่มอื่นที่แสดงไว้เพื่อให้เห็นความสัมพันธ์
 }
 \thaijustify{
-  \textbf{ผู้ใช้ workspace และโปรเจกต์ (รูปที่~\ref{fig:er-workspace-project}):} ผู้ใช้ (User) เข้าสู่ระบบผ่านบัญชีภายนอก (Account) และได้รับ refresh token ที่เก็บเป็นค่า hash แยกตามกลุ่มของการเข้าสู่ระบบ (familyId) ผู้ใช้สร้างหรือได้รับเชิญเข้า workspace โดยมีบทบาท ADMIN หรือ MEMBER (WorkspaceMember) ภายใน workspace มีหลายโปรเจกต์ (Project) และสมาชิกแต่ละคนมีบทบาทในโปรเจกต์ (ProjectMember) ได้แก่ Designer, Project Manager, Client และ Developer แต่ละโปรเจกต์มีความต้องการทางการออกแบบ (DesignIntent) หนึ่งชุด มี persona ได้หลายรายการ (UserPersona) และมีบันทึกกิจกรรม (AuditLog) สำหรับตรวจสอบย้อนหลัง
+  รูปที่~\ref{fig:er-workspace-project} แสดงตารางส่วนผู้ใช้ workspace และโปรเจกต์ โดยผู้ใช้ (User) เข้าสู่ระบบผ่านบัญชีภายนอก (Account) และได้รับ refresh token ที่เก็บเป็นค่า hash แยกตามกลุ่มของการเข้าสู่ระบบ (familyId) ผู้ใช้สร้างหรือได้รับเชิญเข้า workspace โดยมีบทบาท ADMIN หรือ MEMBER (WorkspaceMember) ภายใน workspace มีหลายโปรเจกต์ (Project) และสมาชิกแต่ละคนมีบทบาทในโปรเจกต์ (ProjectMember) ได้แก่ Designer, Project Manager, Client และ Developer แต่ละโปรเจกต์มีความต้องการทางการออกแบบ (DesignIntent) หนึ่งชุด มี persona ได้หลายรายการ (UserPersona) และมีบันทึกกิจกรรม (AuditLog) สำหรับตรวจสอบย้อนหลัง
 }
 \thaijustify{
-  \textbf{การออกแบบและการสร้าง UI ด้วย AI (รูปที่~\ref{fig:er-design-generation}):} โปรเจกต์มี user story (UserStory) ที่นักออกแบบเขียนเองหรือให้ AI ร่าง (StoryGeneration) แต่ละรอบการออกแบบ (DesignRound) อ้างอิง user story หนึ่งเรื่อง และอ้างอิงรอบก่อนหน้าได้ (parentRoundId) เมื่อสั่งสร้าง UI ระบบสร้างงาน (GenerationJob) ที่เก็บ prompt และจำนวน variant ไว้ ผลลัพธ์คือ UI variant (UIVariant) ซึ่งเก็บ HTML และผลการตรวจการเข้าถึง เมื่อนักออกแบบปรับแก้ variant ระบบสร้าง variant ใหม่ที่อ้างอิงฉบับเดิม (parentVariantId) จึงย้อนดูประวัติแต่ละเวอร์ชันได้
+  รูปที่~\ref{fig:er-design-generation} แสดงตารางส่วนการออกแบบและการสร้าง UI ด้วย AI โดยโปรเจกต์มี user story (UserStory) ที่นักออกแบบเขียนเองหรือให้ AI ร่าง (StoryGeneration) แต่ละรอบการออกแบบ (DesignRound) อ้างอิง user story หนึ่งเรื่อง และอ้างอิงรอบก่อนหน้าได้ (parentRoundId) เมื่อสั่งสร้าง UI ระบบสร้างงาน (GenerationJob) ที่เก็บ prompt และจำนวน variant ไว้ ผลลัพธ์คือ UI variant (UIVariant) ซึ่งเก็บ HTML และผลการตรวจการเข้าถึง เมื่อนักออกแบบปรับแก้ variant ระบบสร้าง variant ใหม่ที่อ้างอิงฉบับเดิม (parentVariantId) จึงย้อนดูประวัติแต่ละเวอร์ชันได้
 }
 \thaijustify{
-  \textbf{เซสชันการทดสอบ (รูปที่~\ref{fig:er-testing}):} เซสชันการทดสอบ (TestSession) ผูกกับรอบการออกแบบหนึ่งรอบ และเลือก variant ที่ใช้ทดสอบผ่านตาราง SessionVariant ผู้เข้าร่วมทดสอบ (SessionParticipant) ได้รับลิงก์เชิญที่เก็บเป็นค่า hash และต้องให้ความยินยอมตาม PDPA ก่อนเริ่ม ซึ่งบันทึกไว้ใน ConsentRecord พร้อมเวอร์ชันของข้อความที่ยินยอม ระหว่างทำภารกิจ (TestTask) ระบบบันทึกการทำภารกิจแต่ละครั้ง (TaskRun) พฤติกรรมการใช้งาน (InteractionEvent) และข้อเสนอแนะ (Feedback) ซึ่งระบุได้ว่าเป็นความเห็นต่อ component หรือต่อทั้งหน้าจอ
+  รูปที่~\ref{fig:er-testing} แสดงตารางส่วนเซสชันการทดสอบ โดยเซสชันการทดสอบ (TestSession) ผูกกับรอบการออกแบบหนึ่งรอบ และเลือก variant ที่ใช้ทดสอบผ่านตาราง SessionVariant ผู้เข้าร่วมทดสอบ (SessionParticipant) ได้รับลิงก์เชิญที่เก็บเป็นค่า hash และต้องให้ความยินยอมตาม PDPA ก่อนเริ่ม ซึ่งบันทึกไว้ใน ConsentRecord พร้อมเวอร์ชันของข้อความที่ยินยอม ระหว่างทำภารกิจ (TestTask) ระบบบันทึกการทำภารกิจแต่ละครั้ง (TaskRun) พฤติกรรมการใช้งาน (InteractionEvent) และข้อเสนอแนะ (Feedback) ซึ่งระบุได้ว่าเป็นความเห็นต่อ component หรือต่อทั้งหน้าจอ
 }
 \thaijustify{
-  \textbf{การวิเคราะห์ข้อเสนอแนะและรายงาน (รูปที่~\ref{fig:er-analysis-report}):} ผลการวิเคราะห์ข้อเสนอแนะด้วย AI เก็บใน FeedbackAnalysis และแยกเป็นประเด็น (FeedbackTheme) ที่เชื่อมกับข้อเสนอแนะต้นทางผ่าน ThemeFeedback นักออกแบบรวม แยก หรือตัดสินใจไม่แก้ไขประเด็นได้ ทุกการตัดสินใจถูกบันทึกใน DesignDecision และประเด็นที่เลือกไปปรับปรุงเชื่อมกับรอบการออกแบบถัดไปผ่าน RoundFeedbackLink ทำให้สืบย้อนได้ว่าการเปลี่ยนแปลงแต่ละครั้งมาจากข้อเสนอแนะใด ผู้มีส่วนได้ส่วนเสียแสดงความเห็นและรับทราบรอบที่อนุมัติแล้วได้ (RoundComment, RoundAcknowledgement) และระบบสร้างรายงาน (Report) แยกตามบทบาท
+  รูปที่~\ref{fig:er-analysis-report} แสดงตารางส่วนการวิเคราะห์ข้อเสนอแนะและรายงาน โดยผลการวิเคราะห์ข้อเสนอแนะด้วย AI เก็บใน FeedbackAnalysis และแยกเป็นประเด็น (FeedbackTheme) ที่เชื่อมกับข้อเสนอแนะต้นทางผ่าน ThemeFeedback นักออกแบบรวม แยก หรือตัดสินใจไม่แก้ไขประเด็นได้ ทุกการตัดสินใจถูกบันทึกใน DesignDecision และประเด็นที่เลือกไปปรับปรุงเชื่อมกับรอบการออกแบบถัดไปผ่าน RoundFeedbackLink ทำให้สืบย้อนได้ว่าการเปลี่ยนแปลงแต่ละครั้งมาจากข้อเสนอแนะใด ผู้มีส่วนได้ส่วนเสียแสดงความเห็นและรับทราบรอบที่อนุมัติแล้วได้ (RoundComment, RoundAcknowledgement) และระบบสร้างรายงาน (Report) แยกตามบทบาท
 }
 
 \begin{figure}[p]
@@ -109,7 +111,34 @@
   \label{fig:er-analysis-report}
 \end{figure}
 
-\subsection{User Flow และแผนผังเว็บไซต์ (Site Map)}
+\subsection{User Flow และแผนผังเว็บไซต์ (Site Map)}\label{sec:user-flow}
 \thaijustify{
-  \todo{User flow และ sitemap ให้ตรงกับ hi-fi v2}
+  User flow และแผนผังเว็บไซต์จัดทำตามหน้าจอ high-fidelity ใน Figma ตัวเลขในแต่ละกล่องคือหมายเลขหน้าจอ high-fidelity ซึ่งใช้อ้างอิงตรงกันระหว่างทีมออกแบบและทีมพัฒนา
 }
+\thaijustify{
+  รูปที่~\ref{fig:user-flow-designer} แสดง user flow ของ Designer โดยผู้ใช้ใหม่สมัครสมาชิกด้วยอีเมลหรือบัญชี Google สร้าง workspace แล้วสร้างโปรเจกต์ โดยกำหนดความต้องการทางการออกแบบและสมาชิกในทีม จากนั้นแต่ละ user story จะผ่านวงรอบการออกแบบ ได้แก่ เขียน user story ตรวจ prompt ให้ AI สร้าง A/B และปรับแก้จนพร้อมทดสอบ แล้วตั้งค่าการทดสอบและเปิดเซสชัน ระหว่างการทดสอบ นักออกแบบติดตามผู้เข้าร่วมทดสอบและเข้าไปกำหนดทิศทางเมื่อแนวโน้มความคิดเห็นของผู้เข้าร่วมทดสอบคนใดขึ้นลงผิดปกติ เมื่อทุกคนทดสอบเสร็จ นักออกแบบตรวจประเด็นจากข้อเสนอแนะ เปรียบเทียบ UI สุดท้าย แล้วเลือกอนุมัติหรือทดสอบอีกรอบ เมื่ออนุมัติแล้วจึงสร้างรายงานแยกตามบทบาท
+}
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=0.92\textheight,height=\linewidth,keepaspectratio,angle=90]{figures/ch3-methodology/user-flow-designer.pdf}
+  \caption{User flow ของ Designer}
+  \label{fig:user-flow-designer}
+\end{figure}
+\thaijustify{
+  รูปที่~\ref{fig:user-flow-tester} แสดง user flow ของผู้เข้าร่วมทดสอบและผู้มีส่วนได้ส่วนเสีย โดยผู้เข้าร่วมทดสอบเข้าเซสชันด้วยรหัสหรือลิงก์โดยกรอกเพียงชื่อและอีเมล ให้ความยินยอมตาม PDPA ทำภารกิจบนทั้งสองดีไซน์ ตอบคำถามผ่านแชต และให้ความเห็น จากนั้นระบบเตรียม UI ของรอบถัดไปจากข้อเสนอแนะของผู้เข้าร่วมทดสอบคนนั้น ทำซ้ำจนครบจำนวนรอบหรือไม่มีความเห็นใหม่ แล้วจึงส่งผล ส่วน Client, Developer และ Project Manager เข้าดูรายงานของบทบาทตนเองจากหน้า Reports
+}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{figures/ch3-methodology/user-flow-tester.pdf}
+  \caption{User flow ของผู้เข้าร่วมทดสอบและผู้มีส่วนได้ส่วนเสีย}
+  \label{fig:user-flow-tester}
+\end{figure}
+\thaijustify{
+  รูปที่~\ref{fig:sitemap} แสดงแผนผังเว็บไซต์ โดยหน้าจอแบ่งเป็นเจ็ดส่วน ได้แก่ หน้าก่อนเข้าสู่ระบบ, onboarding, workspace, โปรเจกต์, user story, หน้าของผู้เข้าร่วมทดสอบ และหน้าของผู้มีส่วนได้ส่วนเสีย หน้าที่อยู่หลังการเข้าสู่ระบบใช้ sidebar ในการนำทาง ส่วนหน้าของผู้เข้าร่วมทดสอบไม่มี sidebar เพื่อให้ผู้เข้าร่วมทดสอบจดจ่อกับภารกิจ
+}
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=0.92\textheight,height=\linewidth,keepaspectratio,angle=90]{figures/ch3-methodology/sitemap.pdf}
+  \caption{แผนผังเว็บไซต์ (ย่อหน้าเข้าไปคือหน้าหรือ dialog ที่อยู่ภายในหน้าด้านบน ส่วนเครื่องหมาย * คือหน้าที่ยังไม่มี high-fidelity)}
+  \label{fig:sitemap}
+\end{figure}

@@ -1,0 +1,31 @@
+// Use case: testing session and feedback analysis (hi-fi v2 screens 19-24, 26-36).
+digraph UC3 {
+  graph [rankdir=LR, nodesep=0.18, ranksep=0.5, fontname="TH Sarabun New", fontsize=20, newrank=true];
+  node  [shape=ellipse, fontname="TH Sarabun New", fontsize=17, margin="0.05,0.02"];
+  edge  [fontname="TH Sarabun New", fontsize=15, arrowsize=0.6];
+  designer [label="Designer", shape=box, style="bold"];
+  tester [label="Usability Tester\n(no account)", shape=box, style="bold"];
+  subgraph cluster_test { label="Testing session (Tester)"; style="rounded"; color="#888888";
+    join [label="Join session with\ncode or link\n(name and email)"];
+    consent [label="Give PDPA consent"];
+    task [label="Do task on\nDesign 1 and 2"];
+    chat [label="Answer questions\nin chat"];
+    pin [label="Pin comment on component\nor whole page"];
+    next [label="Test next-round A/B made\nby AI from own feedback"];
+  }
+  subgraph cluster_fb { label="Test setup and feedback analysis (Designer)"; style="rounded"; color="#888888";
+    setup [label="Set up test: tasks,\ncomparison questions,\nhypotheses, max rounds"];
+    open [label="Open session and\nshare code or link"];
+    monitor [label="Monitor testers and\ncomment trends"];
+    step [label="Step in when\ntrend is unusual"];
+    themes [label="Review themes grouped by AI\n(retag, merge, split,\nnot fixing + reason)"];
+    compare [label="Compare final UIs\nand approve"];
+    persona [label="Generate Persona\nArtifact (AI)"];
+  }
+  designer -> {setup monitor themes compare persona} [arrowhead=none];
+  setup -> open [style=dashed, label="«include»"];
+  tester -> {join task chat next} [arrowhead=none];
+  join -> consent [style=dashed, label="«include»"];
+  task -> pin [style=dashed, label="«extend»", dir=back];
+  monitor -> step [style=dashed, label="«extend»", dir=back];
+}
