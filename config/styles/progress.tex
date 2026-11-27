@@ -35,8 +35,9 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Chapter headings %%%%%%%%%%%%%%%%%%%%%%%%%%
 \thsz\thsz@chapter{134}{160}
-%: Cover page text uses the chapter-title size, regular weight (frontmatter/cover.tex).
-\def\coverfont{\normalfont\thsz@chapter}
+%: Cover page text: 16pt regular, as in the KMUTT manual's cover example (frontmatter/cover.tex).
+\thsz\thsz@cover{112}{134}
+\def\coverfont{\normalfont\thsz@cover}
 \def\@makechapterhead#1{%
   \vspace*{-25\p@}%
   {\centering\normalfont\thsz@chapter\bfseries \@chapapp{}~\thechapter\hskip 5\p@ #1\par}%

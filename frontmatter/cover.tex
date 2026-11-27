@@ -1,22 +1,27 @@
 % !TeX root = ../progress-sem1.tex
-% Cover, English only (as asked by the team), positions from Progress_Sem1_THAI_Example1.pdf p1:
-% logo ~3cm wide at the top margin, title at ~7.5cm, members at ~14cm, the degree
-% statement in capitals at the bottom, then the year. Cover text is set at the
-% chapter-title size (19.1pt in the example). Values: config/report-info.tex
-%: To show a title before each name (Mr./Ms.), put it in \engauthor... in report-info.tex.
+% English cover (first page). Follows the KMUTT Thesis Preparation Manual (TH),
+% section 1.1.1 ปกนอก and "ตัวอย่างปกนอกภาษาอังกฤษ" (manual p.27):
+%   logo ~3.6cm wide at the top, title in capitals at ~8cm from the top edge,
+%   authors in capitals at ~15.4cm, the degree statement from ~22.8cm, then the year;
+%   regular weight, 16pt (the manual allows 16-24pt).
+% Authors are written as "student ID + NAME SURNAME" (team decision, no Mr./Ms.).
+% Values: config/report-info.tex
 \begin{titlepage}
   \thispagestyle{empty}
   \setlength{\parindent}{0pt}
   \centering
   \coverfont
-  \includegraphics[width=3.0cm]{figures/common/logo02.jpg}\par
-  \vspace{1.3cm}
-  \disstitleone\par
-  \vspace{4.6cm}
-  \engauthorone\par
-  \engauthortwo\par
-  \engauthorthree\par
-  \engauthorfour\par
+  \vspace*{0.6cm}
+  \includegraphics[width=3.6cm]{figures/common/logo02.jpg}\par
+  \vspace{0.5cm}
+  \MakeUppercase{\disstitleone}\par
+  \vspace{5.0cm}
+  \begin{tabular}{@{}l@{\hspace{1em}}l@{}}
+    \dissstudentidone   & \MakeUppercase{\engauthorone}   \\
+    \dissstudentidtwo   & \MakeUppercase{\engauthortwo}   \\
+    \dissstudentidthree & \MakeUppercase{\engauthorthree} \\
+    \dissstudentidfour  & \MakeUppercase{\engauthorfour}  \\
+  \end{tabular}\par
   \vfill
   A PROJECT SUBMITTED IN PARTIAL FULFILLMENT\par
   OF THE REQUIREMENTS FOR\par
@@ -24,4 +29,5 @@
   FACULTY OF ENGINEERING\par
   KING MONGKUT’S UNIVERSITY OF TECHNOLOGY THONBURI\par
   \dissyear\par
+  \vspace*{0.6cm}
 \end{titlepage}
