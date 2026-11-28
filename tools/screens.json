@@ -1,0 +1,38 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "out": "figures/ch3-methodology/screens",
+  "viewport": { "width": 1440, "height": 900, "scale": 2 },
+  "beforeEach": "document.querySelectorAll('nextjs-portal').forEach(e => e.remove())",
+  "vars": {
+    "project": "af4a12e3-c445-4c81-abaa-5034d554f9e3",
+    "story": "f47405d6-0e59-492a-b603-976d4afc111f",
+    "round": "899a3693-31c4-4faa-b641-2f35fcca423b",
+    "roundUs4": "199489f1-ec25-456e-902f-0d6018cef66b",
+    "storyUs4": "e5a717a2-117d-4ccf-8e02-4925f74a0033"
+  },
+  "shots": [
+    { "name": "signin", "path": "/signin", "public": true },
+    { "name": "signup", "path": "/signup", "public": true },
+    { "name": "projects", "path": "/projects" },
+    { "name": "project-new", "path": "/projects/new" },
+    { "name": "project-overview", "path": "/projects/{project}/overview" },
+    { "name": "design-intent", "path": "/projects/{project}/intent" },
+    { "name": "stories", "path": "/projects/{project}/stories" },
+    { "name": "story", "path": "/projects/{project}/stories/{story}" },
+    { "name": "prompt", "path": "/projects/{project}/stories/{story}/prompt", "wait": 3000 },
+    {
+      "name": "generate-trace", "path": "/projects/{project}/rounds/{round}/refine", "wait": 4000,
+      "actions": [
+        { "eval": "(() => { const e = [...document.querySelectorAll('button,div,p,span')].find(x => x.children.length === 0 && x.innerText && x.innerText.includes('Design intent & context summary')); if (e) e.scrollIntoView({ block: 'start' }); return !!e })()" },
+        { "wait": 800 }
+      ]
+    },
+    { "name": "refine", "path": "/projects/{project}/rounds/{round}/refine", "wait": 4000 },
+    { "name": "story-us4", "path": "/projects/{project}/stories/{storyUs4}" },
+    { "name": "refine-us4", "path": "/projects/{project}/rounds/{roundUs4}/refine", "wait": 6000 },
+    { "name": "refine-us4-b", "path": "/projects/{project}/rounds/{roundUs4}/refine", "wait": 6000,
+      "actions": [ { "clickText": "B", "after": 3000 } ] },
+    { "name": "generate-trace-us4", "path": "/projects/{project}/rounds/{roundUs4}/generate", "wait": 8000 },
+    { "name": "swagger", "path": "http://localhost:4000/api", "wait": 2500 }
+  ]
+}

@@ -37,8 +37,19 @@
 \subsection{Generation Trace}
 \thaijustify{
   ระหว่างสร้าง UI หน้าจอแสดงความคิดของโมเดลและสถานะของแต่ละขั้นแบบ real-time ผ่าน SSE พร้อมเวลาที่ใช้จริงและผลการตรวจจริงของแต่ละ variant รอบการแก้ไขภายในจะไม่แสดงให้ผู้ใช้เห็น เพื่อให้ trace อ่านง่าย และหาก backend เริ่มสร้าง variant ใหม่ trace จะติดตามงานใหม่ต่อโดยอัตโนมัติ
-  \todo{ภาพหน้าจอ generation trace}
 }
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/ch3-methodology/screens/prompt-drafting.png}
+  \caption{ระหว่างร่าง structured prompt หน้าจอแสดงความคิดของโมเดลและจำนวน token แบบ real-time}
+  \label{fig:screen-prompt-drafting}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/ch3-methodology/screens/generate-trace.png}
+  \caption{Generation trace ระหว่างสร้าง variant A และ B}
+  \label{fig:screen-generate-trace}
+\end{figure}
 
 \subsection{การวิเคราะห์ข้อเสนอแนะของผู้ใช้ (Backend)}
 \thaijustify{

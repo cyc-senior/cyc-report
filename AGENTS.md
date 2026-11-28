@@ -73,6 +73,29 @@ When the semester changes, update the "current report" in **both** `.latexmkrc` 
 `.github/workflows/build.yml` (`CURRENT_REPORT`), and the `% !TeX root` lines of shared files
 (`content/ch1..3`, `config/`, `frontmatter/`).
 
+## Screenshots of the app
+
+`tools/capture_screens.mjs` drives the Edge/Chrome already on the machine (headless, temporary profile)
+over the DevTools Protocol and writes PNGs straight into `figures/ch3-methodology/screens/`. No npm install.
+Needs the monorepo's frontend (:3000) and backend (:4000) running.
+
+```
+node tools/capture_screens.mjs --config tools/screens.json --email <user's email in the local DB> --monorepo ../cyc-monorepo
+node tools/capture_screens.mjs --config tools/screens.json --email ... --only refine,swagger   # some shots
+node tools/capture_screens.mjs --config tools/screens.json --email ... --probe                 # print page text/buttons
+```
+
+- Sign-in uses `pnpm dev:url --email` (no Google). The user signs in with Google, so pass **their** email as
+  stored in the local DB (find it from a project they own); the link is never written to disk.
+- `tools/screens.json`: static pages. `tools/screens-pins.json`: comment pins on the refine page (unsent pins
+  live only in the temporary browser profile). `tools/screens-live.json`: drafts a prompt for a story,
+  clicks "Approve & generate" and snaps the generation trace while it runs. **This one writes to the DB and
+  calls the AI gateway (KMUTT VPN)**: use a story made for the purpose and ask the user first.
+- Opening a story's prompt page starts a prompt draft when the story has none saved (it does not overwrite).
+- The ids in `vars` are local-DB ids; update them when the data changes. Each config hides the Next.js dev
+  overlay through `beforeEach`.
+- Look at every PNG before using it (blank/skeleton states, overlays, wrong account).
+
 ## Playbook: new report type from an example PDF
 
 Use this when the user hands over an example PDF (e.g. a sem 2 or final report from another group) and says

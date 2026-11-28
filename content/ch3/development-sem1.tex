@@ -35,7 +35,13 @@
 \thaijustify{
   หน้าจอสมัครสมาชิก เข้าสู่ระบบ และลืมรหัสผ่านพัฒนาส่วน frontend แล้ว ส่วนการสมัครด้วยอีเมลและรหัสผ่าน การยืนยันอีเมล และการรีเซ็ตรหัสผ่านฝั่ง backend อยู่ระหว่างพัฒนาใน branch แยก และจะรวมเข้า branch หลักภายในภาคการศึกษาที่ 1
 }
-\todo{ภาพหน้าจอเข้าสู่ระบบและสมัครสมาชิก}
+\begin{figure}[H]
+  \centering
+  \subfloat[เข้าสู่ระบบ]{\includegraphics[width=0.49\linewidth]{figures/ch3-methodology/screens/signin.png}}\hfill
+  \subfloat[สมัครสมาชิก]{\includegraphics[width=0.49\linewidth]{figures/ch3-methodology/screens/signup.png}}
+  \caption{หน้าจอเข้าสู่ระบบและสมัครสมาชิก}
+  \label{fig:screen-auth}
+\end{figure}
 
 \subsection{M2: Project Setup}
 \thaijustify{
@@ -44,19 +50,54 @@
 \thaijustify{
   ความต้องการทางการออกแบบ (design intent) ของโปรเจกต์ประกอบด้วยเป้าหมายของการออกแบบ design system ที่เลือก (shadcn/ui หรือ MUI) มาตรฐานการเข้าถึง (ค่าเริ่มต้น WCAG 2.1 AA) แนวทางการออกแบบ สีแบรนด์สามสี แนวทาง CI และ tone of voice ทุกครั้งที่แก้ไข ระบบจะเพิ่มเลขเวอร์ชันของ design intent และงานสร้าง UI แต่ละครั้งเก็บสำเนาของ design intent ที่ใช้ไว้ ทำให้ design intent เป็น context ที่ AI นำไปใช้ซ้ำได้ และตรวจสอบย้อนหลังได้ว่า UI แต่ละชุดสร้างจาก design intent ฉบับใด นอกจากนี้นักออกแบบเพิ่ม persona ของผู้ใช้เป้าหมายเองได้ และหน้าภาพรวมของโปรเจกต์แสดงกิจกรรมล่าสุดจาก audit log
 }
-\todo{ภาพหน้าจอสร้างโปรเจกต์และหน้าจอ design intent}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/ch3-methodology/screens/project-new.png}
+  \caption{หน้าจอสร้างโปรเจกต์ (ขั้นที่ 1 จาก 3 ของ wizard)}
+  \label{fig:screen-project-new}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/ch3-methodology/screens/design-intent.png}
+  \caption{หน้าจอกำหนดความต้องการทางการออกแบบ (design intent)}
+  \label{fig:screen-design-intent}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/ch3-methodology/screens/project-overview.png}
+  \caption{หน้าภาพรวมของโปรเจกต์ แสดง user story และกิจกรรมล่าสุด}
+  \label{fig:screen-project-overview}
+\end{figure}
 
 \subsection{M3: AI Design Generation}
 \thaijustify{
-  นักออกแบบเขียน user story และ problem statement ผ่านหน้าจอ ซึ่ง backend รองรับการให้ AI ร่าง user story แล้วแต่ยังไม่มีหน้าจอสำหรับส่วนนี้ จากนั้น AI ร่าง structured prompt จาก design intent, persona และ user story และส่งผลลัพธ์พร้อมความคิดของโมเดลมาแสดงแบบ real-time ผ่าน SSE นักออกแบบเลือก persona ตรวจ และแก้ prompt ก่อนสั่งสร้าง UI
+  นักออกแบบเขียน user story และ problem statement ผ่านหน้าจอ ซึ่ง backend รองรับการให้ AI ร่าง user story แล้วแต่ยังไม่มีหน้าจอสำหรับส่วนนี้ จากนั้น AI ร่าง structured prompt จาก design intent, persona และ user story และส่งผลลัพธ์พร้อมความคิดของโมเดลมาแสดงแบบ real-time ผ่าน SSE นักออกแบบเลือก persona ตรวจ และแก้ prompt ก่อนสั่งสร้าง UI (รูปที่~\ref{fig:screen-story} และ~\ref{fig:screen-prompt})
 }
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/ch3-methodology/screens/story-us4.png}
+  \caption{หน้าจอเขียน user story และ problem statement}
+  \label{fig:screen-story}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/ch3-methodology/screens/prompt.png}
+  \caption{หน้าจอตรวจ structured prompt ที่ AI ร่างก่อนสั่งสร้าง variant A และ B}
+  \label{fig:screen-prompt}
+\end{figure}
 \thaijustify{
-  จากนั้นระบบสร้าง UI variant ตามขั้นตอนในหัวข้อ~\ref{sec:ai-pipeline} ระหว่างนั้นหน้าจอแสดง generation trace แบบ real-time และนักออกแบบยกเลิกงานได้
+  จากนั้นระบบสร้าง UI variant ตามขั้นตอนในหัวข้อ~\ref{sec:ai-pipeline} ระหว่างนั้นหน้าจอแสดง generation trace แบบ real-time (รูปที่~\ref{fig:screen-generate-trace}) และนักออกแบบยกเลิกงานได้
 }
 \thaijustify{
   หลังได้ variant แล้ว นักออกแบบดูตัวอย่างหน้าจอและปรับแก้ผ่านแชต (chat-based refinement) การแก้แต่ละครั้งสร้าง variant เวอร์ชันใหม่ที่อ้างอิงฉบับเดิม จึงย้อนดูเวอร์ชันก่อนหน้าได้ เมื่อพอใจแล้วนักออกแบบอนุมัติ variant เพื่อนำไปทดสอบ สำหรับการกำหนดภารกิจและการเริ่มเซสชันการทดสอบ backend รองรับแล้ว แต่หน้าจอฝั่ง frontend อยู่ในแผนของภาคการศึกษาที่ 2
 }
-\todo{ภาพหน้าจอ user story, การตรวจ prompt, generation trace และการปรับแก้ผ่านแชต}
+\begin{figure}[H]
+  \centering
+  \subfloat[Variant A: single-page direct flow]{\includegraphics[width=0.49\linewidth]{figures/ch3-methodology/screens/refine-us4.png}}\hfill
+  \subfloat[Variant B: staged guided flow]{\includegraphics[width=0.49\linewidth]{figures/ch3-methodology/screens/refine-us4-b.png}}
+  \caption{หน้าจอปรับแก้ variant ผ่านแชต (ซ้าย) พร้อมหน้าตัวอย่าง (ขวา) ของ two-alternative UI ที่ AI สร้างจาก user story เดียวกัน}
+  \label{fig:screen-refine}
+\end{figure}
 
 \subsection{Application Program Interface}
 \thaijustify{
@@ -92,6 +133,11 @@
 \thaijustify{
   API กลุ่มเซสชันการทดสอบ การวิเคราะห์ข้อเสนอแนะ และรายงาน พัฒนาส่วน backend ไว้ล่วงหน้าแล้ว ส่วนหน้าจอที่ใช้ API เหล่านี้อยู่ในแผนของภาคการศึกษาที่ 2
 }
-\todo{ภาพหน้าจอ Swagger UI}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\linewidth]{figures/ch3-methodology/screens/swagger.png}
+  \caption{เอกสาร API ผ่าน Swagger UI}
+  \label{fig:screen-swagger}
+\end{figure}
 
 \input{content/ch3/web-screens}
